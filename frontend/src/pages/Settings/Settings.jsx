@@ -1,6 +1,6 @@
-import { useTheme } from '../hooks/useTheme.js';
-import { useMode } from '../hooks/useMode.js';
-import { IconSun, IconMoon, IconTV, IconDesktop } from '../components/icons.jsx';
+import { useTheme } from '../../hooks/useTheme.js';
+import { useMode } from '../../hooks/useMode.js';
+import { IconSun, IconMoon, IconTV, IconDesktop } from '../../components/icons/icons.jsx';
 import './Settings.css';
 
 export default function Settings() {

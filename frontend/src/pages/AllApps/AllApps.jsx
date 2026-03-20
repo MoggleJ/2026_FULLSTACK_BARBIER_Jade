@@ -1,4 +1,4 @@
-import { useMode } from '../hooks/useMode.js';
+import { useMode } from '../../hooks/useMode.js';
 import './AllApps.css';
 
 export default function AllApps() {

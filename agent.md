@@ -33,6 +33,9 @@ Tu es un assistant de développement fullstack intégré au projet **MJQbe WEB**
 - Ne pas implémenter les fonctionnalités des releases avancées tant que la release de base n'est pas validée
 - Ne pas stocker le JWT en `localStorage` sans évaluation de sécurité — préférer `httpOnly cookie`
 - Ne jamais exposer la DB sur un port public dans Docker
+- Il faut que le projet suive la Clean Architecture
+- Toujours Tester la conformité avec les attendus dans le cahier des charges et le contrat de projet a chaque appel
+- Des que deux elements, (ex Jsx et css) vont ensemble, les placer dans un répertoire distinct.
 
 ### Conventions de code
 
@@ -147,15 +150,6 @@ main              ← production stable
   ```
   VITE_API_URL=http://localhost:5000/api
   ```
-- **Structure src/**
-  ```
-  src/
-  ├── components/     # Sidebar, AppCard, IframeViewer, SearchBar...
-  ├── pages/          # Home, AllApps, Search, Settings
-  ├── context/        # AuthContext, ThemeContext, ModeContext
-  ├── hooks/          # useAuth, useApps, useSettings
-  └── App.jsx
-  ```
 
 ---
 
@@ -172,14 +166,7 @@ main              ← production stable
   BCRYPT_ROUNDS=10
   CORS_ORIGIN=http://localhost:5173
   ```
-- **Structure src/**
-  ```
-  src/
-  ├── routes/         # auth.js, apps.js, categories.js, settings.js
-  ├── middlewares/    # authMiddleware.js, roleMiddleware.js
-  ├── controllers/    # authController.js, appsController.js...
-  └── index.js
-  ```
+ 
 - **Routes exposées** :
   ```
   POST   /api/auth/register

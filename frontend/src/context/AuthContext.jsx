@@ -1,16 +1,28 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
 
 const API = import.meta.env.VITE_API_URL;
+const TOKEN_KEY = 'mjqbe_token';
 
 export const AuthContext = createContext(null);
+
+function authHeader(token) {
+  return { Authorization: `Bearer ${token}` };
+}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Restaure la session au montage via le cookie httpOnly
+  // Restaure la session au montage via le token stocké
   useEffect(() => {
-    fetch(`${API}/auth/me`, { credentials: 'include' })
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+    fetch(`${API}/auth/me`, {
+      headers: { 'Content-Type': 'application/json', ...authHeader(token) },
+    })
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => setUser(data?.user ?? null))
       .catch(() => setUser(null))
@@ -21,11 +33,11 @@ export function AuthProvider({ children }) {
     const res = await fetch(`${API}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
       body: JSON.stringify({ username, password }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
+    localStorage.setItem(TOKEN_KEY, data.token);
     setUser(data.user);
     return data.user;
   }, []);
@@ -34,20 +46,24 @@ export function AuthProvider({ children }) {
     const res = await fetch(`${API}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
       body: JSON.stringify({ username, password }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
+    localStorage.setItem(TOKEN_KEY, data.token);
     setUser(data.user);
     return data.user;
   }, []);
 
   const logout = useCallback(async () => {
-    await fetch(`${API}/auth/logout`, {
-      method: 'POST',
-      credentials: 'include',
-    });
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (token) {
+      fetch(`${API}/auth/logout`, {
+        method: 'POST',
+        headers: authHeader(token),
+      }).catch(() => {});
+    }
+    localStorage.removeItem(TOKEN_KEY);
     setUser(null);
   }, []);
 

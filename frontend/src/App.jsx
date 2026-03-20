@@ -2,14 +2,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { ThemeProvider } from './context/ThemeContext.jsx';
 import { ModeProvider } from './context/ModeContext.jsx';
-import ProtectedRoute from './components/ProtectedRoute.jsx';
-import Layout from './components/Layout.jsx';
-import Login from './pages/Login.jsx';
-import Register from './pages/Register.jsx';
-import Home from './pages/Home.jsx';
-import AllApps from './pages/AllApps.jsx';
-import Search from './pages/Search.jsx';
-import Settings from './pages/Settings.jsx';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
+import Layout from './components/Layout/Layout.jsx';
+import Login from './pages/Auth/Login.jsx';
+import Register from './pages/Auth/Register.jsx';
+import Home from './pages/Home/Home.jsx';
+import AllApps from './pages/AllApps/AllApps.jsx';
+import Search from './pages/Search/Search.jsx';
+import Settings from './pages/Settings/Settings.jsx';
 
 export default function App() {
   return (

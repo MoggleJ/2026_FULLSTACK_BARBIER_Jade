@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IconSearch } from '../components/icons.jsx';
+import { IconSearch } from '../../components/icons/icons.jsx';
 import './Search.css';
 
 export default function Search() {

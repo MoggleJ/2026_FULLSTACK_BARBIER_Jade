@@ -1,5 +1,5 @@
-import { useAuth } from '../hooks/useAuth.js';
-import { useMode } from '../hooks/useMode.js';
+import { useAuth } from '../../hooks/useAuth.js';
+import { useMode } from '../../hooks/useMode.js';
 import './Home.css';
 
 export default function Home() {

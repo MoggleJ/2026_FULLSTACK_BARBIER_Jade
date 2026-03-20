@@ -14,35 +14,6 @@ Application web hub permettant d'accéder à différentes applications en ligne 
 - **Base de données** : PostgreSQL (driver `pg` ou Prisma)
 - **Infra** : Docker, Docker Compose, Nginx (prod)
 
----
-
-## Structure du dépôt
-
-```
-mjqbe-web/
-├── frontend/           # React + Vite
-│   ├── src/
-│   │   ├── components/ # Composants réutilisables (Sidebar, AppCard, etc.)
-│   │   ├── pages/      # Home, AllApps, Search, Settings
-│   │   ├── context/    # AuthContext, ThemeContext, ModeContext
-│   │   └── App.jsx
-│   ├── Dockerfile
-│   └── nginx.conf
-├── backend/            # Express API REST
-│   ├── src/
-│   │   ├── routes/     # auth.js, apps.js, categories.js, settings.js
-│   │   ├── middlewares/ # authMiddleware.js, roleMiddleware.js
-│   │   ├── controllers/
-│   │   └── index.js
-│   └── Dockerfile
-├── db/
-│   └── init.sql        # Script SQL d'init des tables
-├── docker-compose.yml
-└── .env.example
-```
-
----
-
 ## Conventions de code
 
 ### Nommage
@@ -204,3 +175,7 @@ docker exec -it mjqbe_db psql -U user -d mjqbe
 - Ne jamais commiter `.env` — utiliser `.env.example` comme référence
 - ESLint doit passer sans erreur avant chaque commit
 - La DB est initialisée via `db/init.sql` au premier démarrage du container PostgreSQL
+- Il faut que le projet suive la Clean Architecture
+- Toujours Tester la conformité avec les attendus dans le cahier des charges et le contrat de projet a chaque appel
+- Des que deux elements, (ex Jsx et css) vont ensemble, les placer dans un répertoire distinct.
+

@@ -5,22 +5,6 @@ import pool from '../db.js';
 const BCRYPT_ROUNDS = parseInt(process.env.BCRYPT_ROUNDS) || 10;
 const JWT_EXPIRES = '7d';
 
-const isProduction = process.env.NODE_ENV === 'production';
-
-const cookieOptions = {
-  httpOnly: true,
-  secure: isProduction,
-  sameSite: 'lax',
-  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 jours
-};
-
-// Options sans maxAge — utilisées pour clearCookie (doit correspondre exactement)
-const cookieClearOptions = {
-  httpOnly: true,
-  secure: isProduction,
-  sameSite: 'lax',
-};
-
 function issueToken(user) {
   return jwt.sign(
     { id: user.id, role: user.role },
@@ -63,8 +47,7 @@ export async function register(req, res) {
     await pool.query('INSERT INTO settings (user_id) VALUES ($1)', [user.id]);
 
     const token = issueToken(user);
-    res.cookie('token', token, cookieOptions);
-    res.status(201).json({ user });
+    res.status(201).json({ token, user });
   } catch (err) {
     console.error('register error:', err);
     res.status(500).json({ message: 'Erreur serveur' });
@@ -96,8 +79,7 @@ export async function login(req, res) {
     }
 
     const token = issueToken(user);
-    res.cookie('token', token, cookieOptions);
-    res.json({ user: { id: user.id, username: user.username, role: user.role } });
+    res.json({ token, user: { id: user.id, username: user.username, role: user.role } });
   } catch (err) {
     console.error('login error:', err);
     res.status(500).json({ message: 'Erreur serveur' });
@@ -105,7 +87,7 @@ export async function login(req, res) {
 }
 
 export function logout(_req, res) {
-  res.clearCookie('token', cookieClearOptions);
+  // Côté serveur, rien à faire : le client supprime son token
   res.json({ message: 'Déconnecté' });
 }
 

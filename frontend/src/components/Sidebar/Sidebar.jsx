@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth.js';
-import { useMode } from '../hooks/useMode.js';
-import { useTheme } from '../hooks/useTheme.js';
+import { useAuth } from '../../hooks/useAuth.js';
+import { useMode } from '../../hooks/useMode.js';
+import { useTheme } from '../../hooks/useTheme.js';
 import {
   IconHome,
   IconGrid,
@@ -12,7 +12,7 @@ import {
   IconLogout,
   IconSun,
   IconMoon,
-} from './icons.jsx';
+} from '../icons/icons.jsx';
 import './Sidebar.css';
 
 export default function Sidebar() {
