@@ -28,6 +28,7 @@ services:
     container_name: mjqbe_backend
     restart: unless-stopped
     environment:
+      NODE_ENV: ${NODE_ENV:-development}
       DATABASE_URL: postgresql://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-mjqbe}
       PORT: ${PORT:-5000}
       JWT_SECRET: ${JWT_SECRET:-change_me_in_production}

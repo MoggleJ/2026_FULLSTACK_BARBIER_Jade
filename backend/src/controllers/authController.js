@@ -5,11 +5,20 @@ import pool from '../db.js';
 const BCRYPT_ROUNDS = parseInt(process.env.BCRYPT_ROUNDS) || 10;
 const JWT_EXPIRES = '7d';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const cookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
+  secure: isProduction,
   sameSite: 'lax',
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 jours
+};
+
+// Options sans maxAge — utilisées pour clearCookie (doit correspondre exactement)
+const cookieClearOptions = {
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: 'lax',
 };
 
 function issueToken(user) {
@@ -96,7 +105,7 @@ export async function login(req, res) {
 }
 
 export function logout(_req, res) {
-  res.clearCookie('token', { httpOnly: true, sameSite: 'lax' });
+  res.clearCookie('token', cookieClearOptions);
   res.json({ message: 'Déconnecté' });
 }
 
