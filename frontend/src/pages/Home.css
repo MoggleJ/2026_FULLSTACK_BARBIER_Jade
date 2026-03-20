@@ -1,29 +1,36 @@
-.home-placeholder {
+.page-home {
   padding: var(--space-8);
-  color: var(--color-text);
 }
 
-.home-placeholder h1 {
-  font-size: 1.5rem;
+.page-header {
+  margin-bottom: var(--space-8);
+}
+
+.page-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.mode-badge {
+  color: var(--color-accent);
   font-weight: 600;
 }
 
-.home-placeholder p {
-  color: var(--color-text-muted);
-  margin-top: var(--space-2);
-}
-
-.home-placeholder .btn-logout {
-  margin-top: var(--space-6);
-  padding: var(--space-2) var(--space-6);
-  background: var(--color-surface-hover);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: background-color 150ms;
-}
-
-.home-placeholder .btn-logout:hover {
-  background: var(--color-border);
+.page-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-xl);
+  color: var(--color-text-subtle);
+  font-size: 0.9375rem;
 }

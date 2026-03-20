@@ -42,6 +42,18 @@
   --font-size-base: 16px;
 }
 
+/* ── Thème clair ──────────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --color-bg:            #f4f4f5;   /* zinc-100 */
+  --color-surface:       #ffffff;
+  --color-surface-hover: #e4e4e7;   /* zinc-200 */
+  --color-border:        #d4d4d8;   /* zinc-300 */
+
+  --color-text:         #09090b;    /* zinc-950 */
+  --color-text-muted:   #52525b;    /* zinc-600 */
+  --color-text-subtle:  #71717a;    /* zinc-500 */
+}
+
 /* ── Reset ────────────────────────────────────────────────────────────────── */
 *,
 *::before,

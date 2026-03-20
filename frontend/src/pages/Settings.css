@@ -1,0 +1,114 @@
+.page-settings {
+  padding: var(--space-8);
+}
+
+.settings-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.settings-section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+}
+
+.settings-section-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-4);
+}
+
+/* Row layout */
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.settings-row-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.settings-row-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.settings-row-desc {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* Toggle button */
+.settings-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-surface-hover);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: background-color 150ms, border-color 150ms;
+  white-space: nowrap;
+}
+
+.settings-toggle-btn:hover {
+  background-color: var(--color-border);
+  border-color: var(--color-accent);
+}
+
+/* Mode cards */
+.settings-mode-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.settings-mode-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-4);
+  background-color: var(--color-surface-hover);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: border-color 150ms, color 150ms, background-color 150ms;
+  text-align: center;
+}
+
+.settings-mode-card:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.settings-mode-card.active {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background-color: color-mix(in srgb, var(--color-accent) 8%, var(--color-surface-hover));
+}
+
+.settings-mode-label {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.settings-mode-desc {
+  font-size: 0.8125rem;
+  color: var(--color-text-subtle);
+}
