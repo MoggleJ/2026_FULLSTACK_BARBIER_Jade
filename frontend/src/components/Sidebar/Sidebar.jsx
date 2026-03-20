@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useMode } from '../../hooks/useMode.js';
 import { useTheme } from '../../hooks/useTheme.js';
+import { useClock } from '../../hooks/useClock.js';
 import {
   IconHome,
   IconGrid,
@@ -12,13 +13,15 @@ import {
   IconLogout,
   IconSun,
   IconMoon,
+  IconClock,
 } from '../icons/icons.jsx';
 import './Sidebar.css';
 
 export default function Sidebar() {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const { mode, toggleMode } = useMode();
   const { theme, toggleTheme } = useTheme();
+  const time = useClock();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -89,7 +92,10 @@ export default function Sidebar() {
         </button>
 
         <div className="sidebar-user">
-          <span className="sidebar-username sidebar-label">{user?.username}</span>
+          <span className="sidebar-clock">
+            <IconClock />
+            <span className="sidebar-label sidebar-clock-time">{time}</span>
+          </span>
           <button
             className="sidebar-logout"
             onClick={handleLogout}
