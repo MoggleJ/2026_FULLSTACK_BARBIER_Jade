@@ -1,30 +1,28 @@
-import { useEffect, useState } from 'react';
-import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
+import Home from './pages/Home.jsx';
 
-function App() {
-  const [apiStatus, setApiStatus] = useState(null);
-
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/health`)
-      .then((res) => res.json())
-      .then((data) => setApiStatus(data))
-      .catch(() => setApiStatus({ status: 'error', message: 'Impossible de joindre l\'API' }));
-  }, []);
-
+export default function App() {
   return (
-    <div className="app">
-      <h1>MJQbe WEB</h1>
-      <p>Sprint 1 — Test de communication Frontend ↔ API</p>
-      {apiStatus ? (
-        <div className={`status ${apiStatus.status}`}>
-          <strong>API :</strong> {apiStatus.message}
-          {apiStatus.db && <span> | DB : {apiStatus.db}</span>}
-        </div>
-      ) : (
-        <div className="status loading">Connexion à l'API...</div>
-      )}
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/*"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
-
-export default App;

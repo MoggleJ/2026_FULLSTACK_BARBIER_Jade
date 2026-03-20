@@ -1,23 +1,87 @@
+/* ── Design system — MJQbe WEB ───────────────────────────────────────────── */
 :root {
-  --color-bg: #1a1a2e;
-  --color-surface: #16213e;
-  --color-primary: #0f3460;
-  --color-accent: #e94560;
-  --color-text: #eaeaea;
-  --color-text-muted: #a0a0b0;
+  /* Backgrounds */
+  --color-bg:            #09090b;   /* zinc-950 */
+  --color-surface:       #18181b;   /* zinc-900 */
+  --color-surface-hover: #27272a;   /* zinc-800 */
+  --color-border:        #27272a;   /* zinc-800 */
+
+  /* Textes */
+  --color-text:         #fafafa;    /* zinc-50  */
+  --color-text-muted:   #a1a1aa;    /* zinc-400 */
+  --color-text-subtle:  #71717a;    /* zinc-500 */
+
+  /* Accent */
+  --color-accent:       #0ea5e9;    /* sky-500  */
+  --color-accent-hover: #2563eb;    /* blue-600 */
+
+  /* Sémantique */
+  --color-danger:       #d4183d;
+
+  /* Sidebar */
+  --sidebar-width:            256px;
+  --sidebar-width-collapsed:   80px;
+
+  /* Border radius */
+  --radius-sm:   6px;
+  --radius-md:   8px;
+  --radius-lg:   10px;
+  --radius-xl:   14px;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+
+  /* Typography */
   --font-size-base: 16px;
 }
 
-* {
+/* ── Reset ────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
+html {
   font-size: var(--font-size-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
   min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ── Utilitaires globaux ──────────────────────────────────────────────────── */
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+}
+
+.loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: var(--radius-full);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
