@@ -40,19 +40,6 @@ CREATE TABLE IF NOT EXISTS settings (
   selected_apps JSONB
 );
 
--- Utilisateurs de seed
--- Jade (admin)  : mot de passe → admin123
--- Lambda (user) : mot de passe → user123
-INSERT INTO users (username, password_hash, role) VALUES
-  ('Jade',   '$2b$10$sB2sZwNvioiJ5.7fDKmoUOYj0MrGfOhKsY1CDUDnufo3Andt574nq', 'admin'),
-  ('lambda', '$2b$10$liTFnovQE./K23tjdAqUsODWDEfBfXpUKAaigyDJn1V8ZQ5Ly4Dn2', 'user')
-ON CONFLICT (username) DO NOTHING;
-
--- Settings par défaut pour chaque utilisateur seed
-INSERT INTO settings (user_id)
-  SELECT id FROM users WHERE username IN ('Jade', 'lambda')
-ON CONFLICT (user_id) DO NOTHING;
-
 -- Données de démo : catégories
 INSERT INTO categories (name, mode) VALUES
   ('Streaming',    'TV'),
