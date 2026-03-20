@@ -26,6 +26,7 @@ services:
       context: ./backend
       target: dev
     container_name: mjqbe_backend
+    command: sh -c "npm install && npm run dev"
     restart: unless-stopped
     environment:
       NODE_ENV: ${NODE_ENV:-development}
