@@ -5,6 +5,7 @@ import { LangProvider } from './context/LangContext.jsx';
 import { ClockFormatProvider } from './context/ClockFormatContext.jsx';
 import { ModeProvider } from './context/ModeContext.jsx';
 import { IconSizeProvider } from './context/IconSizeContext.jsx';
+import { LayoutProvider } from './context/LayoutContext.jsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import Layout from './components/Layout/Layout.jsx';
 import Login from './pages/Auth/Login.jsx';
@@ -30,7 +31,9 @@ export default function App() {
                     <ProtectedRoute>
                       <ModeProvider>
                         <IconSizeProvider>
-                          <Layout />
+                          <LayoutProvider>
+                            <Layout />
+                          </LayoutProvider>
                         </IconSizeProvider>
                       </ModeProvider>
                     </ProtectedRoute>

@@ -3,7 +3,7 @@
 ## 1. Présentation générale du projet
 Le projet **MJQbe WEB** consiste à concevoir une application web servant de hub permettant d'accéder à différentes applications en ligne via une interface.
 
-Contrairement à ma version embarquée sur Raspberry Pi, cette version est **100% web**, accessible depuis un navigateur, sans interaction directe avec le matériel de l'utilisateur.
+Contrairement à ma version embarquée sur Raspberry Pi, cette version est **web**, accessible depuis un navigateur, sans interaction directe avec le matériel de l'utilisateur.
 
 L'objectif est de proposer des services web (streaming, outils, apps).
 
@@ -104,7 +104,6 @@ Fonctionnalités :
 * Hash des mots de passe (**Bcrypt**)
 * Protection des routes API
 * Validation des entrées utilisateur
-* Utilisation de HTTPS
 * Gestion des rôles (admin / utilisateur)
 * **CORS Policy** : Restriction des accès API au domaine du frontend uniquement.
 

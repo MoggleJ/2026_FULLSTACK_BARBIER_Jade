@@ -13,9 +13,13 @@
   width: 100%;
 }
 
-.app-card:hover {
+.app-card:hover,
+.app-card:focus-visible {
   color: var(--color-text);
   transform: translateY(-5px) scale(1.05);
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-xl);
 }
 
 /* ── Icône ─────────────────────────────────────────────── */

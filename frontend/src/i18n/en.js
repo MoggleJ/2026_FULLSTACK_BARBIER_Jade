@@ -53,6 +53,10 @@ export default {
     iconSizeSmall: 'Small',
     iconSizeMedium: 'Medium',
     iconSizeLarge: 'Large',
+    layout: 'Layout',
+    layoutDesc: 'Switch between grid or list view',
+    layoutGrid: 'Grid',
+    layoutList: 'List',
   },
   auth: {
     username: 'Username',

@@ -53,6 +53,10 @@ export default {
     iconSizeSmall: 'Petite',
     iconSizeMedium: 'Moyenne',
     iconSizeLarge: 'Grande',
+    layout: 'Disposition',
+    layoutDesc: 'Choisir entre grille ou liste',
+    layoutGrid: 'Grille',
+    layoutList: 'Liste',
   },
   auth: {
     username: "Nom d'utilisateur",

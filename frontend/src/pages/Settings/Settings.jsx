@@ -6,6 +6,7 @@ import { useLang } from '../../hooks/useLang.js';
 import { useClockFormat } from '../../hooks/useClockFormat.js';
 import { useClock } from '../../hooks/useClock.js';
 import { useIconSize } from '../../hooks/useIconSize.js';
+import { useLayout } from '../../hooks/useLayout.js';
 import { useSettings } from '../../hooks/useSettings.js';
 import {
   IconClock,
@@ -15,6 +16,8 @@ import {
   IconDesktop,
   IconLogout,
   IconGlobe,
+  IconGrid,
+  IconList,
 } from '../../components/icons/icons.jsx';
 import './Settings.css';
 
@@ -25,7 +28,8 @@ export default function Settings() {
   const { lang, setLang, t } = useLang();
   const { clockFormat, setClockFormat } = useClockFormat();
   const { iconSize } = useIconSize();
-  const { applyTheme, applyMode, applyIconSize } = useSettings();
+  const { layout } = useLayout();
+  const { applyTheme, applyMode, applyIconSize, applyLayout } = useSettings();
   const previewTime = useClock(clockFormat);
   const navigate = useNavigate();
 
@@ -104,6 +108,31 @@ export default function Settings() {
                   {t(`settings.iconSize${size.charAt(0).toUpperCase() + size.slice(1)}`)}
                 </button>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Disposition ── */}
+        <section className="settings-section">
+          <h2 className="settings-section-title">{t('settings.layout')}</h2>
+          <div className="settings-row">
+            <div className="settings-row-info">
+              <span className="settings-row-label">{t('settings.layout')}</span>
+              <span className="settings-row-desc">{t('settings.layoutDesc')}</span>
+            </div>
+            <div className="settings-lang-buttons">
+              <button
+                className={`settings-lang-btn${layout === 'grid' ? ' active' : ''}`}
+                onClick={() => applyLayout('grid')}
+              >
+                <IconGrid /> {t('settings.layoutGrid')}
+              </button>
+              <button
+                className={`settings-lang-btn${layout === 'list' ? ' active' : ''}`}
+                onClick={() => applyLayout('list')}
+              >
+                <IconList /> {t('settings.layoutList')}
+              </button>
             </div>
           </div>
         </section>
