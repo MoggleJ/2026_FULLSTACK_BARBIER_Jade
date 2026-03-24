@@ -185,53 +185,53 @@ Cette version ne prend pas en charge :
 ### 🏃 Sprint 1 : Fondations & Dockerisation
 *Objectif : Mettre en place l'environnement de développement et la communication de base.*
 
-- [ ] Configuration du dépôt Git et de l'arborescence (`/frontend`, `/backend`).
-- [ ] Création du `docker-compose.yml` (Services : Postgres, Node, React).
-- [ ] Initialisation de la base de données avec le script SQL des tables (`Users`, `Apps`, `Categories`, `Settings`).
-- [ ] Configuration du Backend Express (Connexion à la DB via `pg` ou `TypeORM/Prisma`).
-- [ ] Test de communication : Le Frontend affiche un message provenant de l'API.
+- [x] Configuration du dépôt Git et de l'arborescence (`/frontend`, `/backend`).
+- [x] Création du `docker-compose.yml` (Services : Postgres, Node, React).
+- [x] Initialisation de la base de données avec le script SQL des tables (`Users`, `Apps`, `Categories`, `Settings`).
+- [x] Configuration du Backend Express (Connexion à la DB via `pg` ou `TypeORM/Prisma`).
+- [x] Test de communication : Le Frontend affiche un message provenant de l'API.
 
 ---
 
 ### 🏃 Sprint 2 : Authentification & Sécurité (Core)
 *Objectif : Sécuriser l'accès et permettre la personnalisation utilisateur.*
 
-- [ ] Mise en place du Hashage de mot de passe avec **Bcrypt**.
-- [ ] Création des routes API `Register` et `Login`.
-- [ ] Implémentation du système **JWT** (Génération du token et middleware de validation).
-- [ ] Création du store React (Context API ou Redux) pour gérer l'état de l'utilisateur.
-- [ ] Configuration des politiques **CORS** sur Express pour Docker.
+- [x] Mise en place du Hashage de mot de passe avec **Bcrypt**.
+- [x] Création des routes API `Register` et `Login`.
+- [x] Implémentation du système **JWT** (Génération du token et middleware de validation).
+- [x] Création du store React (Context API ou Redux) pour gérer l'état de l'utilisateur.
+- [x] Configuration des politiques **CORS** sur Express pour Docker.
 
 ---
 
 ### 🏃 Sprint 3 : Structure de l'Interface (Layout)
 *Objectif : Construire la coque de MJQbe WEB.*
 
-- [ ] Création de la **Sidebar fixe** à gauche (Responsive).
-- [ ] Implémentation du **Titre Dynamique** (MJ TV / MJ Desktop) selon le mode actif.
-- [ ] Mise en place du système de routage (React Router) : Home, Search, Settings.
-- [ ] Création du switch de mode (TV / Desktop) dans la sidebar.
-- [ ] Intégration du système de Thème (Clair/Sombre) dans le CSS/Styled Components.
+- [x] Création de la **Sidebar fixe** à gauche (Responsive).
+- [x] Implémentation du **Titre Dynamique** (MJ TV / MJ Desktop) selon le mode actif.
+- [x] Mise en place du système de routage (React Router) : Home, Search, Settings.
+- [x] Création du switch de mode (TV / Desktop) dans la sidebar.
+- [x] Intégration du système de Thème (Clair/Sombre) dans le CSS/Styled Components.
 
 ---
 
 ### 🏃 Sprint 4 : Gestion des Applications & Modes
 *Objectif : Rendre le Hub fonctionnel avec des données réelles.*
 
-- [ ] CRUD API pour la table `Apps` (Admin peut ajouter/éditer une app).
-- [ ] Affichage de la **Grille d'applications** dynamique selon le mode sélectionné.
-- [ ] Logique d'ouverture : Script pour détecter si l'app s'ouvre en **Iframe** ou **Nouvel onglet** (`is_external`).
-- [ ] Mise en place du composant "App Card" (Icône, Nom, Catégorie).
-- [ ] Implémentation de la barre de recherche (`Search`) filtrant les apps en temps réel.
+- [x] CRUD API pour la table `Apps` (Admin peut ajouter/éditer une app).
+- [x] Affichage de la **Grille d'applications** dynamique selon le mode sélectionné.
+- [x] Logique d'ouverture : Script pour détecter si l'app s'ouvre en **Iframe** ou **Nouvel onglet** (`is_external`).
+- [x] Mise en place du composant "App Card" (Icône, Nom, Catégorie).
+- [x] Implémentation de la barre de recherche (`Search`) filtrant les apps en temps réel.
 
 ---
 
 ### 🏃 Sprint 5 : Personnalisation & Expérience Utilisateur
 *Objectif : Finaliser les fonctionnalités de la release de base.*
 
-- [ ] Page **Settings** : Formulaire pour modifier le thème, la taille des icônes et le layout.
-- [ ] Persistance des réglages : Sauvegarde automatique dans la table `Settings` en DB.
-- [ ] Navigation au clavier (Flèches/Entrée) pour le **Mode TV**.
+- [x] Page **Settings** : Formulaire pour modifier le thème, la taille des icônes et le layout.
+- [x] Persistance des réglages : Sauvegarde automatique dans la table `Settings` en DB.
+- [x] Navigation au clavier (Flèches/Entrée) pour le **Mode TV**.
 
 ---
 
