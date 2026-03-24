@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
+import { useLang } from '../../hooks/useLang.js';
 import './Auth.css';
 
 export default function Login() {
   const { login } = useAuth();
+  const { t } = useLang();
   const navigate = useNavigate();
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
@@ -34,18 +36,18 @@ export default function Login() {
           <span className="auth-logo-mj">MJ</span>
           <span className="auth-logo-qbe">Qbe</span>
         </div>
-        <h1 className="auth-title">Connexion</h1>
-        <p className="auth-subtitle">Accédez à votre hub personnel</p>
+        <h1 className="auth-title">{t('auth.login.title')}</h1>
+        <p className="auth-subtitle">{t('auth.login.subtitle')}</p>
 
         <form onSubmit={handleSubmit} className="auth-form" noValidate>
           <div className="form-field">
-            <label htmlFor="username">Nom d'utilisateur</label>
+            <label htmlFor="username">{t('auth.username')}</label>
             <input
               id="username"
               name="username"
               type="text"
               autoComplete="username"
-              placeholder="votre_username"
+              placeholder={t('auth.usernamePlaceholder')}
               value={form.username}
               onChange={handleChange}
               required
@@ -53,7 +55,7 @@ export default function Login() {
           </div>
 
           <div className="form-field">
-            <label htmlFor="password">Mot de passe</label>
+            <label htmlFor="password">{t('auth.password')}</label>
             <input
               id="password"
               name="password"
@@ -69,13 +71,13 @@ export default function Login() {
           {error && <p className="form-error" role="alert">{error}</p>}
 
           <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? 'Connexion…' : 'Se connecter'}
+            {loading ? t('auth.login.submitting') : t('auth.login.submit')}
           </button>
         </form>
 
         <p className="auth-link">
-          Pas encore de compte ?{' '}
-          <Link to="/register">Créer un compte</Link>
+          {t('auth.login.noAccount')}{' '}
+          <Link to="/register">{t('auth.login.createAccount')}</Link>
         </p>
       </div>
     </div>

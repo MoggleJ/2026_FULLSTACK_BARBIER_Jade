@@ -18,10 +18,6 @@
   /* Sémantique */
   --color-danger:       #d4183d;
 
-  /* Sidebar */
-  --sidebar-width:            256px;
-  --sidebar-width-collapsed:   80px;
-
   /* Border radius */
   --radius-sm:   6px;
   --radius-md:   8px;
@@ -36,10 +32,15 @@
   --space-4:  16px;
   --space-6:  24px;
   --space-8:  32px;
+  --space-10: 40px;
   --space-12: 48px;
 
+  /* Sidebar */
+  --sidebar-width:            300px;
+  --sidebar-width-collapsed:   88px;
+
   /* Typography */
-  --font-size-base: 16px;
+  --font-size-base: 20px;
 }
 
 /* ── Thème clair ──────────────────────────────────────────────────────────── */
@@ -96,4 +97,44 @@ body {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* ── Utilitaires pages ────────────────────────────────────────────────────── */
+.page-header {
+  margin-bottom: var(--space-8);
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.mode-badge {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.page-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-xl);
+  color: var(--color-text-subtle);
+  font-size: 0.9375rem;
+}
+
+.page-error {
+  color: var(--color-danger);
+  font-size: 0.9375rem;
+  padding: var(--space-4) 0;
 }

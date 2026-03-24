@@ -1,36 +1,3 @@
 .page-home {
   padding: var(--space-8);
 }
-
-.page-header {
-  margin-bottom: var(--space-8);
-}
-
-.page-title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--color-text);
-  line-height: 1.2;
-}
-
-.page-subtitle {
-  margin-top: var(--space-2);
-  color: var(--color-text-muted);
-  font-size: 1rem;
-}
-
-.mode-badge {
-  color: var(--color-accent);
-  font-weight: 600;
-}
-
-.page-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
-  border: 2px dashed var(--color-border);
-  border-radius: var(--radius-xl);
-  color: var(--color-text-subtle);
-  font-size: 0.9375rem;
-}

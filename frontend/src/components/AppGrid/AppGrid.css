@@ -1,0 +1,115 @@
+.app-grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+
+  /* Valeurs par défaut (desktop medium) */
+  --card-icon-container: 128px;
+  --card-icon-size: 120px;
+  --card-initial-font: 3rem;
+  --card-name-font: 1.25rem;
+  --grid-min-col: 150px;
+  --grid-gap: var(--space-6);
+}
+
+/* ── Desktop — compact ───────────────────────────────────── */
+.app-grid-container--mode-desktop.app-grid-container--small {
+  --card-icon-container: 80px;
+  --card-icon-size: 72px;
+  --card-initial-font: 2rem;
+  --card-name-font: 1rem;
+  --grid-min-col: 100px;
+  --grid-gap: var(--space-4);
+}
+
+.app-grid-container--mode-desktop.app-grid-container--medium {
+  --card-icon-container: 128px;
+  --card-icon-size: 120px;
+  --card-initial-font: 3rem;
+  --card-name-font: 1.25rem;
+  --grid-min-col: 150px;
+  --grid-gap: var(--space-6);
+}
+
+.app-grid-container--mode-desktop.app-grid-container--large {
+  --card-icon-container: 192px;
+  --card-icon-size: 180px;
+  --card-initial-font: 4rem;
+  --card-name-font: 1.5rem;
+  --grid-min-col: 210px;
+  --grid-gap: var(--space-6);
+}
+
+/* ── TV — grand écran, 10-foot UI ────────────────────────── */
+.app-grid-container--mode-tv.app-grid-container--small {
+  --card-icon-container: 160px;
+  --card-icon-size: 148px;
+  --card-initial-font: 3.5rem;
+  --card-name-font: 1.375rem;
+  --grid-min-col: 180px;
+  --grid-gap: var(--space-8);
+}
+
+.app-grid-container--mode-tv.app-grid-container--medium {
+  --card-icon-container: 220px;
+  --card-icon-size: 208px;
+  --card-initial-font: 5rem;
+  --card-name-font: 1.75rem;
+  --grid-min-col: 250px;
+  --grid-gap: var(--space-10);
+}
+
+.app-grid-container--mode-tv.app-grid-container--large {
+  --card-icon-container: 290px;
+  --card-icon-size: 276px;
+  --card-initial-font: 6rem;
+  --card-name-font: 2rem;
+  --grid-min-col: 310px;
+  --grid-gap: var(--space-12);
+}
+
+/* ── Boutons filtre catégorie ────────────────────────────── */
+.app-grid-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.app-grid-filter-btn {
+  padding: var(--space-2) var(--space-6);
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 150ms, color 150ms, background-color 150ms;
+  white-space: nowrap;
+}
+
+.app-grid-filter-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.app-grid-filter-btn.active {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background-color: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
+}
+
+/* ── Grille ──────────────────────────────────────────────── */
+.app-grid--tv,
+.app-grid--desktop {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--grid-min-col), 1fr));
+  gap: var(--grid-gap);
+}
+
+/* ── État vide ───────────────────────────────────────────── */
+.app-grid-empty {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  padding: var(--space-8) 0;
+}

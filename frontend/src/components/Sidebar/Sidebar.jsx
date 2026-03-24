@@ -1,8 +1,8 @@
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth.js';
+import { NavLink } from 'react-router-dom';
 import { useMode } from '../../hooks/useMode.js';
-import { useTheme } from '../../hooks/useTheme.js';
 import { useClock } from '../../hooks/useClock.js';
+import { useClockFormat } from '../../hooks/useClockFormat.js';
+import { useLang } from '../../hooks/useLang.js';
 import {
   IconHome,
   IconGrid,
@@ -10,24 +10,15 @@ import {
   IconTV,
   IconDesktop,
   IconSettings,
-  IconLogout,
-  IconSun,
-  IconMoon,
   IconClock,
 } from '../icons/icons.jsx';
 import './Sidebar.css';
 
 export default function Sidebar() {
-  const { logout } = useAuth();
   const { mode, toggleMode } = useMode();
-  const { theme, toggleTheme } = useTheme();
-  const time = useClock();
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await logout();
-    navigate('/login');
-  };
+  const { t } = useLang();
+  const { clockFormat, toggleClockFormat } = useClockFormat();
+  const time = useClock(clockFormat);
 
   const navClass = ({ isActive }) =>
     `sidebar-item${isActive ? ' sidebar-item--active' : ''}`;
@@ -37,10 +28,15 @@ export default function Sidebar() {
       {/* ── Titre dynamique ── */}
       <div className="sidebar-header">
         <span className="sidebar-logo">
-          <span className="sidebar-logo-mj">MJ</span>
-          <span className="sidebar-logo-mode sidebar-label">
-            {mode === 'TV' ? 'TV' : 'Desktop'}
+          <span className="sidebar-logo-icon">
+            {mode === 'TV' ? <IconTV /> : <IconDesktop />}
           </span>
+          <div className="sidebar-logo-text">
+            <span className="sidebar-logo-mj">MJ</span>
+            <span className="sidebar-logo-mode sidebar-label">
+              {mode === 'TV' ? 'TV' : 'Desktop'}
+            </span>
+          </div>
         </span>
       </div>
 
@@ -48,17 +44,17 @@ export default function Sidebar() {
       <nav className="sidebar-nav">
         <NavLink to="/" end className={navClass}>
           <IconHome />
-          <span className="sidebar-label">Home</span>
+          <span className="sidebar-label">{t('sidebar.home')}</span>
         </NavLink>
 
         <NavLink to="/apps" className={navClass}>
           <IconGrid />
-          <span className="sidebar-label">All Apps</span>
+          <span className="sidebar-label">{t('sidebar.allApps')}</span>
         </NavLink>
 
         <NavLink to="/search" className={navClass}>
           <IconSearch />
-          <span className="sidebar-label">Search</span>
+          <span className="sidebar-label">{t('sidebar.search')}</span>
         </NavLink>
       </nav>
 
@@ -67,7 +63,7 @@ export default function Sidebar() {
       <button className="sidebar-item sidebar-mode-switch" onClick={toggleMode}>
         {mode === 'TV' ? <IconDesktop /> : <IconTV />}
         <span className="sidebar-label">
-          {mode === 'TV' ? 'MJ Desktop' : 'MJ TV'}
+          {mode === 'TV' ? t('sidebar.switchToDesktop') : t('sidebar.switchToTV')}
         </span>
       </button>
 
@@ -77,33 +73,13 @@ export default function Sidebar() {
       <div className="sidebar-footer">
         <NavLink to="/settings" className={navClass}>
           <IconSettings />
-          <span className="sidebar-label">Settings</span>
+          <span className="sidebar-label">{t('sidebar.settings')}</span>
         </NavLink>
 
-        <button
-          className="sidebar-item sidebar-theme-toggle"
-          onClick={toggleTheme}
-          title={theme === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre'}
-        >
-          {theme === 'dark' ? <IconSun /> : <IconMoon />}
-          <span className="sidebar-label">
-            {theme === 'dark' ? 'Thème clair' : 'Thème sombre'}
-          </span>
+        <button className="sidebar-item sidebar-clock" onClick={toggleClockFormat} title={clockFormat === '24h' ? '12h' : '24h'}>
+          <IconClock />
+          <span className="sidebar-label sidebar-clock-time">{time}</span>
         </button>
-
-        <div className="sidebar-user">
-          <span className="sidebar-clock">
-            <IconClock />
-            <span className="sidebar-label sidebar-clock-time">{time}</span>
-          </span>
-          <button
-            className="sidebar-logout"
-            onClick={handleLogout}
-            title="Se déconnecter"
-          >
-            <IconLogout />
-          </button>
-        </div>
       </div>
     </aside>
   );

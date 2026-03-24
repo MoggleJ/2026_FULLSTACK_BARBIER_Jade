@@ -1,22 +1,28 @@
 import { useMode } from '../../hooks/useMode.js';
+import { useApps } from '../../hooks/useApps.js';
+import { useOpenApp } from '../../hooks/useOpenApp.js';
+import { useLang } from '../../hooks/useLang.js';
+import AppGrid from '../../components/AppGrid/AppGrid.jsx';
 import './AllApps.css';
 
 export default function AllApps() {
   const { mode } = useMode();
+  const { t } = useLang();
+  const { apps, loading, error } = useApps(mode);
+  const openApp = useOpenApp();
 
   return (
     <div className="page-allapps">
       <div className="page-header">
-        <h1 className="page-title">All Apps</h1>
+        <h1 className="page-title">{t('allApps.title')}</h1>
         <p className="page-subtitle">
-          Mode : <span className="mode-badge">{mode === 'TV' ? 'MJ TV' : 'MJ Desktop'}</span>
+          {t('allApps.mode')} <span className="mode-badge">{t(`modes.${mode}`)}</span>
         </p>
       </div>
 
-      {/* Placeholder — Sprint 4 */}
-      <div className="page-placeholder">
-        <p>Liste complète des applications — Sprint 4</p>
-      </div>
+      {loading && <div className="loading-screen"><div className="loading-spinner" /></div>}
+      {error && <p className="page-error">{t('error.loadApps')}</p>}
+      {!loading && !error && <AppGrid apps={apps} onOpen={openApp} />}
     </div>
   );
 }

@@ -178,4 +178,6 @@ docker exec -it mjqbe_db psql -U user -d mjqbe
 - Il faut que le projet suive la Clean Architecture
 - Toujours Tester la conformité avec les attendus dans le cahier des charges et le contrat de projet a chaque appel
 - Des que deux elements, (ex Jsx et css) vont ensemble, les placer dans un répertoire distinct.
+- A chaque fin de sprint X, commit et push sur une branche associée au sprint X.
+- A chaque début de sprint X, commit sur la branche X-1 et dev.
 

@@ -243,7 +243,6 @@ Cette version ne prend pas en charge :
 - [ ] Gestion des erreurs (Pages 404, erreurs de chargement d'Iframe).
 - [ ] Test de la réactivité (Responsive) sur tablette et mobile.
 - [ ] Nettoyage du code et documentation de l'API (Swagger ou simple README).
-- [ ] **Déploiement final** : Lancement de l'ensemble via `docker-compose up --build`.
 
 ---
 

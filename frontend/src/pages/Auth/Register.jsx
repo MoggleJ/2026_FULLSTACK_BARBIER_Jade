@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
+import { useLang } from '../../hooks/useLang.js';
 import './Auth.css';
 
 export default function Register() {
   const { register } = useAuth();
+  const { t } = useLang();
   const navigate = useNavigate();
   const [form, setForm] = useState({ username: '', password: '', confirm: '' });
   const [error, setError] = useState('');
@@ -18,7 +20,7 @@ export default function Register() {
     setError('');
 
     if (form.password !== form.confirm) {
-      return setError('Les mots de passe ne correspondent pas');
+      return setError(t('auth.register.passwordMismatch'));
     }
 
     setLoading(true);
@@ -39,18 +41,18 @@ export default function Register() {
           <span className="auth-logo-mj">MJ</span>
           <span className="auth-logo-qbe">Qbe</span>
         </div>
-        <h1 className="auth-title">Créer un compte</h1>
-        <p className="auth-subtitle">Rejoignez votre hub personnel</p>
+        <h1 className="auth-title">{t('auth.register.title')}</h1>
+        <p className="auth-subtitle">{t('auth.register.subtitle')}</p>
 
         <form onSubmit={handleSubmit} className="auth-form" noValidate>
           <div className="form-field">
-            <label htmlFor="username">Nom d'utilisateur</label>
+            <label htmlFor="username">{t('auth.username')}</label>
             <input
               id="username"
               name="username"
               type="text"
               autoComplete="username"
-              placeholder="votre_username"
+              placeholder={t('auth.usernamePlaceholder')}
               value={form.username}
               onChange={handleChange}
               required
@@ -60,13 +62,13 @@ export default function Register() {
           </div>
 
           <div className="form-field">
-            <label htmlFor="password">Mot de passe</label>
+            <label htmlFor="password">{t('auth.password')}</label>
             <input
               id="password"
               name="password"
               type="password"
               autoComplete="new-password"
-              placeholder="minimum 6 caractères"
+              placeholder={t('auth.register.passwordPlaceholder')}
               value={form.password}
               onChange={handleChange}
               required
@@ -75,7 +77,7 @@ export default function Register() {
           </div>
 
           <div className="form-field">
-            <label htmlFor="confirm">Confirmer le mot de passe</label>
+            <label htmlFor="confirm">{t('auth.register.confirmLabel')}</label>
             <input
               id="confirm"
               name="confirm"
@@ -91,13 +93,13 @@ export default function Register() {
           {error && <p className="form-error" role="alert">{error}</p>}
 
           <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? 'Création…' : 'Créer le compte'}
+            {loading ? t('auth.register.submitting') : t('auth.register.submit')}
           </button>
         </form>
 
         <p className="auth-link">
-          Déjà un compte ?{' '}
-          <Link to="/login">Se connecter</Link>
+          {t('auth.register.hasAccount')}{' '}
+          <Link to="/login">{t('auth.register.loginLink')}</Link>
         </p>
       </div>
     </div>
