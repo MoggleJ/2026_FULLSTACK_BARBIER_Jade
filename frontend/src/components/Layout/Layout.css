@@ -10,3 +10,9 @@
   overflow-y: auto;
   min-width: 0;
 }
+
+@media (max-width: 639px) {
+  .layout-main {
+    padding-bottom: var(--mobile-nav-height);
+  }
+}

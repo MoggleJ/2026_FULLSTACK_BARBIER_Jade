@@ -25,6 +25,7 @@ export default {
     back: '← Back',
     openInTab: 'Open in tab ↗',
     notFound: 'App not found.',
+    blocked: 'This site blocks iframe embedding. Open it in a new tab.',
   },
   settings: {
     title: 'Settings',
@@ -57,6 +58,11 @@ export default {
     layoutDesc: 'Switch between grid or list view',
     layoutGrid: 'Grid',
     layoutList: 'List',
+  },
+  notFound: {
+    title: 'Page not found',
+    desc: "The page you're looking for doesn't exist.",
+    back: '← Back to home',
   },
   auth: {
     username: 'Username',

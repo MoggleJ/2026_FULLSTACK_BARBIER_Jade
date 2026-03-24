@@ -61,6 +61,38 @@
   background-color: #fff;
 }
 
+/* ── Iframe masqué si bloqué ────────────────────────────── */
+.app-viewer-frame--hidden {
+  display: none;
+}
+
+/* ── Iframe bloqué ──────────────────────────────────────── */
+.app-viewer-blocked {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: var(--space-8);
+}
+
+.app-viewer-blocked a {
+  padding: var(--space-2) var(--space-5);
+  background-color: var(--color-accent);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 150ms;
+}
+
+.app-viewer-blocked a:hover {
+  opacity: 0.85;
+}
+
 /* ── Erreur ─────────────────────────────────────────────── */
 .app-viewer-error {
   display: flex;

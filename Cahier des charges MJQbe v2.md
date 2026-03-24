@@ -238,10 +238,10 @@ Cette version ne prend pas en charge :
 ### 🏃 Sprint 6 : Polissage & Optimisation Nginx
 *Objectif : Préparer le projet pour la production.*
 
-- [ ] Optimisation du Dockerfile Frontend (Utilisation de **Nginx** pour servir les fichiers statiques).
-- [ ] Gestion des erreurs (Pages 404, erreurs de chargement d'Iframe).
-- [ ] Test de la réactivité (Responsive) sur tablette et mobile.
-- [ ] Nettoyage du code et documentation de l'API (Swagger ou simple README).
+- [x] Optimisation du Dockerfile Frontend (Utilisation de **Nginx** pour servir les fichiers statiques).
+- [x] Gestion des erreurs (Pages 404, erreurs de chargement d'Iframe).
+- [x] Test de la réactivité (Responsive) sur tablette et mobile.
+- [x] Nettoyage du code et documentation de l'API (Swagger ou simple README).
 
 ---
 

@@ -25,6 +25,7 @@ export default {
     back: '← Retour',
     openInTab: 'Ouvrir dans un onglet ↗',
     notFound: 'Application introuvable.',
+    blocked: "Ce site bloque l'intégration en iframe. Ouvrez-le dans un nouvel onglet.",
   },
   settings: {
     title: 'Paramètres',
@@ -57,6 +58,11 @@ export default {
     layoutDesc: 'Choisir entre grille ou liste',
     layoutGrid: 'Grille',
     layoutList: 'Liste',
+  },
+  notFound: {
+    title: 'Page introuvable',
+    desc: "La page que vous cherchez n'existe pas.",
+    back: '← Retour à l\'accueil',
   },
   auth: {
     username: "Nom d'utilisateur",

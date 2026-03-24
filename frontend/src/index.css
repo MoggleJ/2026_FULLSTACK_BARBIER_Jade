@@ -38,6 +38,7 @@
   /* Sidebar */
   --sidebar-width:            300px;
   --sidebar-width-collapsed:   88px;
+  --mobile-nav-height:          64px;
 
   /* Typography */
   --font-size-base: 20px;
