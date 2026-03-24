@@ -125,6 +125,23 @@
 .settings-lang-buttons {
   display: flex;
   gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .settings-row {
+    flex-wrap: wrap;
+  }
+
+  .settings-lang-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .settings-lang-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .settings-lang-btn {

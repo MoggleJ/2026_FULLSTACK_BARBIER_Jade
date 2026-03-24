@@ -167,6 +167,15 @@ SELECT name, icon, url,
        (SELECT id FROM categories WHERE name = 'Mes Apps' AND mode = 'Desktop'),
        'Desktop', FALSE
 FROM (VALUES
-  ('Mon Portfolio',  '/logos/portfolio.png', '/portfolio'),
   ('Gestion Tâches', '/logos/task.png',      '/tasks')
+) AS t(name, icon, url);
+
+-- Mes Apps (externes)
+
+INSERT INTO apps (name, icon, url, category_id, mode, is_external)
+SELECT name, icon, url,
+       (SELECT id FROM categories WHERE name = 'Mes Apps' AND mode = 'Desktop'),
+       'Desktop', TRUE
+FROM (VALUES
+  ('Mon Portfolio',  'https://mogglej.github.io/Portfolio_2026/favicon.ico', 'https://mogglej.github.io/Portfolio_2026/')
 ) AS t(name, icon, url);

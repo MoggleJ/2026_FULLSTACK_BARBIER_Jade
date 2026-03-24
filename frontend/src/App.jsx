@@ -16,6 +16,7 @@ import Search from './pages/Search/Search.jsx';
 import Settings from './pages/Settings/Settings.jsx';
 import AppViewer from './pages/AppViewer/AppViewer.jsx';
 import NotFound from './pages/NotFound/NotFound.jsx';
+import AdminApps from './pages/Admin/AdminApps.jsx';
 
 export default function App() {
   return (
@@ -45,6 +46,7 @@ export default function App() {
                   <Route path="/search" element={<Search />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/viewer/:id" element={<AppViewer />} />
+                  <Route path="/admin" element={<AdminApps />} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>

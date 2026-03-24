@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme.js';
 import { useMode } from '../../hooks/useMode.js';
 import { useAuth } from '../../hooks/useAuth.js';
@@ -24,7 +24,7 @@ import './Settings.css';
 export default function Settings() {
   const { theme } = useTheme();
   const { mode } = useMode();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const { lang, setLang, t } = useLang();
   const { clockFormat, setClockFormat } = useClockFormat();
   const { iconSize } = useIconSize();
@@ -190,6 +190,22 @@ export default function Settings() {
             </div>
           </div>
         </section>
+
+        {/* ── Admin ── */}
+        {user?.role === 'admin' && (
+          <section className="settings-section">
+            <h2 className="settings-section-title">{t('admin.title')}</h2>
+            <div className="settings-row">
+              <div className="settings-row-info">
+                <span className="settings-row-label">{t('admin.adminLink')}</span>
+                <span className="settings-row-desc">{t('admin.adminLinkDesc')}</span>
+              </div>
+              <Link to="/admin" className="settings-toggle-btn">
+                {t('admin.adminLink')}
+              </Link>
+            </div>
+          </section>
+        )}
 
         {/* ── Compte ── */}
         <section className="settings-section">
