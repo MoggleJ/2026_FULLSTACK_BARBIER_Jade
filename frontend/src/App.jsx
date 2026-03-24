@@ -17,6 +17,7 @@ import Settings from './pages/Settings/Settings.jsx';
 import AppViewer from './pages/AppViewer/AppViewer.jsx';
 import NotFound from './pages/NotFound/NotFound.jsx';
 import AdminApps from './pages/Admin/AdminApps.jsx';
+import OAuthCallback from './pages/Auth/OAuthCallback.jsx';
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
               <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/oauth/callback" element={<OAuthCallback />} />
                 <Route
                   element={
                     <ProtectedRoute>

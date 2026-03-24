@@ -3,6 +3,7 @@ import { useMode } from '../../hooks/useMode.js';
 import { useApps } from '../../hooks/useApps.js';
 import { useOpenApp } from '../../hooks/useOpenApp.js';
 import { useLang } from '../../hooks/useLang.js';
+import { useFavorites } from '../../hooks/useFavorites.js';
 import AppGrid from '../../components/AppGrid/AppGrid.jsx';
 import './Home.css';
 
@@ -10,9 +11,9 @@ export default function Home() {
   const { user } = useAuth();
   const { mode } = useMode();
   const { t } = useLang();
-  // Placeholder Sprint 7 : affichera les favoris/récents — pour l'instant toutes les apps du mode
   const { apps, loading, error } = useApps(mode);
   const openApp = useOpenApp();
+  const { favoriteIds, toggle } = useFavorites();
 
   return (
     <div className="page-home">
@@ -25,7 +26,14 @@ export default function Home() {
 
       {loading && <div className="loading-screen"><div className="loading-spinner" /></div>}
       {error && <p className="page-error">{t('error.loadApps')}</p>}
-      {!loading && !error && <AppGrid apps={apps} onOpen={openApp} />}
+      {!loading && !error && (
+        <AppGrid
+          apps={apps}
+          onOpen={openApp}
+          favoriteIds={favoriteIds}
+          onToggleFavorite={toggle}
+        />
+      )}
     </div>
   );
 }

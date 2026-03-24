@@ -38,6 +38,29 @@ CREATE TABLE IF NOT EXISTS settings (
   selected_apps JSONB
 );
 
+CREATE TABLE IF NOT EXISTS favorites (
+  id      SERIAL PRIMARY KEY,
+  user_id UUID    NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  app_id  INTEGER NOT NULL REFERENCES apps(id)  ON DELETE CASCADE,
+  UNIQUE (user_id, app_id)
+);
+
+CREATE TABLE IF NOT EXISTS logs (
+  id         SERIAL PRIMARY KEY,
+  user_id    UUID         REFERENCES users(id) ON DELETE SET NULL,
+  action     VARCHAR(50)  NOT NULL,
+  metadata   JSONB,
+  created_at TIMESTAMPTZ  NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS oauth_accounts (
+  id          SERIAL PRIMARY KEY,
+  user_id     UUID        NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  provider    VARCHAR(20) NOT NULL,
+  provider_id VARCHAR(200) NOT NULL,
+  UNIQUE (provider, provider_id)
+);
+
 -- ── Catégories ────────────────────────────────────────────────────────────────
 
 INSERT INTO categories (name, mode) VALUES

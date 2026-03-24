@@ -6,7 +6,7 @@ import { useLayout } from '../../hooks/useLayout.js';
 import AppCard from '../AppCard/AppCard.jsx';
 import './AppGrid.css';
 
-export default function AppGrid({ apps, onOpen }) {
+export default function AppGrid({ apps, onOpen, favoriteIds, onToggleFavorite }) {
   const { mode } = useMode();
   const { t } = useLang();
   const { iconSize } = useIconSize();
@@ -83,7 +83,13 @@ export default function AppGrid({ apps, onOpen }) {
 
       <div className={gridClass} ref={gridRef}>
         {filtered.map((app) => (
-          <AppCard key={app.id} app={app} onOpen={onOpen} />
+          <AppCard
+            key={app.id}
+            app={app}
+            onOpen={onOpen}
+            isFavorite={favoriteIds?.has(app.id)}
+            onToggleFavorite={onToggleFavorite}
+          />
         ))}
       </div>
     </div>

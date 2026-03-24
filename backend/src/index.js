@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import passport from './config/passport.js';
 import pool from './db.js';
 import apiRouter from './routes/routes.js';
 
@@ -11,6 +12,7 @@ app.use(cors({
   origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
 }));
 app.use(express.json());
+app.use(passport.initialize());
 
 // Health check — avant le router pour éviter auth
 app.get('/api/health', async (_req, res) => {

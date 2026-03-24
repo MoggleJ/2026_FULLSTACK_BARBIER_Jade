@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import * as userRepo from '../repositories/user-repository.js';
+import { log } from './log-service.js';
 
 const BCRYPT_ROUNDS = parseInt(process.env.BCRYPT_ROUNDS) || 10;
 const JWT_EXPIRES = '7d';
@@ -40,10 +41,12 @@ export async function login(username, password) {
   const valid = user && await bcrypt.compare(password, user.password_hash);
   if (!valid) throw fail(401, 'Identifiants invalides');
 
-  return {
+  const result = {
     token: issueToken(user),
     user: { id: user.id, username: user.username, role: user.role },
   };
+  await log(user.id, 'login', { username: user.username });
+  return result;
 }
 
 export async function getMe(userId) {

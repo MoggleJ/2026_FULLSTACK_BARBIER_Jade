@@ -1,4 +1,5 @@
 .app-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,6 +21,38 @@
   outline: 3px solid var(--color-accent);
   outline-offset: 4px;
   border-radius: var(--radius-xl);
+}
+
+/* ── Favori ────────────────────────────────────────────── */
+.app-card-fav {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  background: none;
+  border: none;
+  font-size: 1.125rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transition: opacity 150ms, color 150ms, transform 150ms;
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+}
+
+.app-card:hover .app-card-fav,
+.app-card:focus-visible .app-card-fav,
+.app-card-fav--active {
+  opacity: 1 !important;
+}
+
+.app-card-fav--active {
+  color: #e74c3c;
+}
+
+.app-card-fav:hover {
+  transform: scale(1.2);
+  color: #e74c3c;
 }
 
 /* ── Icône ─────────────────────────────────────────────── */

@@ -68,6 +68,10 @@ export default {
     username: "Nom d'utilisateur",
     usernamePlaceholder: 'votre_username',
     password: 'Mot de passe',
+    orWith: 'ou',
+    continueWithGoogle: 'Continuer avec Google',
+    continueWithGitHub: 'Continuer avec GitHub',
+    oauthError: 'Échec de la connexion OAuth. Réessayez.',
     login: {
       title: 'Connexion',
       subtitle: 'Accédez à votre hub personnel',

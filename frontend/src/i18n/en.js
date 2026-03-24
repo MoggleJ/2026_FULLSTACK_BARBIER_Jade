@@ -68,6 +68,10 @@ export default {
     username: 'Username',
     usernamePlaceholder: 'your_username',
     password: 'Password',
+    orWith: 'or',
+    continueWithGoogle: 'Continue with Google',
+    continueWithGitHub: 'Continue with GitHub',
+    oauthError: 'OAuth sign-in failed. Please try again.',
     login: {
       title: 'Login',
       subtitle: 'Access your personal hub',
