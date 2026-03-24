@@ -127,24 +127,8 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ── Responsive — collapsed (< 1024px) ────────────────────────────────── */
+/* ── Responsive — bottom nav (< 1024px) ───────────────────────────────── */
 @media (max-width: 1023px) {
-  .sidebar {
-    width: var(--sidebar-width-collapsed);
-  }
-
-  .sidebar-label {
-    display: none;
-  }
-
-  .sidebar-item {
-    justify-content: center;
-    padding: var(--space-4) 0;
-  }
-}
-
-/* ── Responsive — bottom nav (< 640px) ────────────────────────────────── */
-@media (max-width: 639px) {
   .sidebar {
     width: 100%;
     height: var(--mobile-nav-height);
@@ -160,7 +144,8 @@
   .sidebar-header,
   .sidebar-spacer,
   .sidebar-footer,
-  .sidebar-divider {
+  .sidebar-divider,
+  .sidebar-mode-switch {
     display: none;
   }
 
@@ -189,5 +174,12 @@
   .sidebar-item svg {
     width: 22px;
     height: 22px;
+  }
+}
+
+/* ── Mobile — cacher labels si trop petit (< 400px) ───────────────────── */
+@media (max-width: 399px) {
+  .sidebar-label {
+    display: none;
   }
 }
