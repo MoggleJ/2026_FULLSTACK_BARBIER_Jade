@@ -11,12 +11,14 @@ CREATE TABLE IF NOT EXISTS users (
   password_hash TEXT NOT NULL DEFAULT '',   -- vide pour comptes OAuth
   role          VARCHAR(20) NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin')),
   email         VARCHAR(255) UNIQUE,        -- sprint 8
-  avatar        TEXT                        -- sprint 8
+  avatar        TEXT,                       -- sprint 8
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- Sprint 8 migration (no-op si les colonnes existent déjà)
-ALTER TABLE users ADD COLUMN IF NOT EXISTS email  VARCHAR(255) UNIQUE;
-ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar TEXT;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS email      VARCHAR(255) UNIQUE;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar     TEXT;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
 ALTER TABLE users ALTER COLUMN password_hash SET DEFAULT '';
 
 CREATE TABLE IF NOT EXISTS categories (

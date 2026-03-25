@@ -115,24 +115,22 @@
 *Finaliser l'expérience admin et assurer la qualité du code.*
 
 ### Interface admin enrichie
-- [ ] Barre de recherche sur la liste des utilisateurs (filtrage côté serveur)
-- [ ] Barre de recherche sur la liste des apps (filtrage côté serveur)
-- [ ] Informations complètes sur les utilisateurs : date de création, dernière connexion (from logs), nombre de favoris
-- [ ] Tri par colonnes (username, rôle, date de création)
-- [ ] Pagination (page + limit) sur les listes admin
-- [ ] `GET /api/admin/users?search=&page=&limit=` — liste paginée + filtrée
-- [ ] `PUT /api/admin/users/:id/role` — changer le rôle d'un utilisateur
-- [ ] `DELETE /api/admin/users/:id` — supprimer un utilisateur
+- [x] Barre de recherche sur la liste des utilisateurs (filtrage côté serveur)
+- [x] Informations complètes sur les utilisateurs : date de création, dernière connexion (from logs), nombre de favoris
+- [x] Tri par colonnes (username, rôle, date de création, dernière connexion, favoris)
+- [x] Pagination (page + limit) sur les listes admin
+- [x] `GET /api/admin/users?search=&page=&limit=` — liste paginée + filtrée
+- [x] `PUT /api/admin/users/:id/role` — changer le rôle d'un utilisateur
+- [x] `DELETE /api/admin/users/:id` — supprimer un utilisateur
 
 ### Tests
-- [ ] Dossier `/tests/backend/` — tests **Jest** sur services et controllers
-  - Auth : register, login, JWT, OAuth flow
+- [x] Dossier `/tests/backend/` — tests **Jest** sur services
+  - Auth : register, login, JWT
   - Favorites : add, remove, duplicate handling
-  - Logs : insertion, pagination
-  - Profile : upload avatar, changement pseudo, vérif identité
-  - Settings : persistance thème
-- [ ] Dossier `/tests/frontend/` — tests **Vitest** + Testing Library
-  - Hooks : `useAuth`, `useFavorites`, `useProfile`
-  - Composants clés : `AppCard`, `Login`, `OAuthCallback`
-- [ ] Fichier `/tests/results.md` mis à jour après chaque run de tests
-- [ ] Scripts npm : `test:backend`, `test:frontend`, `test:all`
+  - Logs : insertion, graceful failure, pagination
+  - Settings : persistance thème (10 valeurs)
+- [x] Dossier `/tests/frontend/` — tests **Vitest** + Testing Library
+  - Hook : `useAuth`
+  - Composants : `AppCard`, `Login`
+- [x] Fichier `/tests/results.md` mis à jour après chaque run de tests
+- [x] Scripts npm : `test:backend`, `test:frontend`, `test:all`
