@@ -19,19 +19,21 @@ import {
 } from '../../components/icons/icons.jsx';
 
 const THEMES = [
-  { id: 'dark',         bg: '#18181b', accent: '#0ea5e9' },
-  { id: 'dark-blue',    bg: '#0f172a', accent: '#60a5fa' },
-  { id: 'dark-purple',  bg: '#1a1030', accent: '#a78bfa' },
-  { id: 'amoled',       bg: '#000000', accent: '#22d3ee' },
-  { id: 'dark-green',   bg: '#14532d', accent: '#34d399' },
-  { id: 'light',        bg: '#f9fafb', accent: '#0284c7' },
-  { id: 'light-warm',   bg: '#fffbeb', accent: '#d97706' },
-  { id: 'light-blue',   bg: '#f0f9ff', accent: '#0284c7' },
-  { id: 'light-purple', bg: '#faf5ff', accent: '#7c3aed' },
-  { id: 'light-green',    bg: '#f0fdf4', accent: '#16a34a' },
+  // ── Sombres ──
+  { id: 'dark',           bg: '#18181b', accent: '#0ea5e9' },
+  { id: 'dark-blue',      bg: '#0f172a', accent: '#60a5fa' },
+  { id: 'dark-purple',    bg: '#1a1030', accent: '#a78bfa' },
+  { id: 'dark-green',     bg: '#14532d', accent: '#34d399' },
   { id: 'dark-red',       bg: '#1c0a0a', accent: '#ef4444' },
-  { id: 'light-red',      bg: '#fff5f5', accent: '#dc2626' },
   { id: 'dark-contrast',  bg: '#000000', accent: '#ffffff' },
+  { id: 'amoled',         bg: '#000000', accent: '#22d3ee' },
+  // ── Clairs ──
+  { id: 'light',          bg: '#f9fafb', accent: '#0284c7' },
+  { id: 'light-warm',     bg: '#fffbeb', accent: '#d97706' },
+  { id: 'light-blue',     bg: '#f0f9ff', accent: '#0284c7' },
+  { id: 'light-purple',   bg: '#faf5ff', accent: '#7c3aed' },
+  { id: 'light-green',    bg: '#f0fdf4', accent: '#16a34a' },
+  { id: 'light-red',      bg: '#fff5f5', accent: '#dc2626' },
   { id: 'light-contrast', bg: '#ffffff', accent: '#000000' },
 ];
 import './Settings.css';
