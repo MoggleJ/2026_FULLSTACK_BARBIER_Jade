@@ -1,4 +1,4 @@
-# Cahier des charges — MJQbe WEB version (Enrichi)
+ Cahier des charges — MJQbe WEB version (Enrichi)
 
 ## 1. Présentation générale du projet
 Le projet **MJQbe WEB** consiste à concevoir une application web servant de hub permettant d'accéder à différentes applications en ligne via une interface.
