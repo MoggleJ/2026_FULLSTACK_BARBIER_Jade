@@ -10,7 +10,7 @@
 
 .settings-section {
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: var(--space-6);
 }
@@ -56,7 +56,7 @@
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
   background-color: var(--color-surface-hover);
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
   border-radius: var(--radius-lg);
   color: var(--color-text);
   font-size: 0.9375rem;
@@ -84,7 +84,7 @@
   gap: var(--space-2);
   padding: var(--space-6) var(--space-4);
   background-color: var(--color-surface-hover);
-  border: 2px solid var(--color-border);
+  border: 0.1rem solid var(--color-border);
   border-radius: var(--radius-xl);
   color: var(--color-text-muted);
   cursor: pointer;
@@ -128,7 +128,7 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .settings-row {
     flex-wrap: wrap;
   }
@@ -147,7 +147,7 @@
 .settings-lang-btn {
   padding: var(--space-2) var(--space-4);
   background-color: var(--color-surface-hover);
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
   border-radius: var(--radius-lg);
   color: var(--color-text-muted);
   font-size: 0.9375rem;
@@ -180,7 +180,7 @@
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2);
-  border: 2px solid transparent;
+  border: 0.1rem solid transparent;
   border-radius: var(--radius-xl);
   background: none;
   cursor: pointer;
@@ -198,16 +198,16 @@
 
 .settings-theme-swatch-circle {
   display: block;
-  width: 44px;
-  height: 44px;
+  width: 2.2rem;
+  height: 2.2rem;
   border-radius: var(--radius-full);
   background-color: var(--swatch-bg);
-  border: 3px solid var(--swatch-accent);
+  border: 0.15rem solid var(--swatch-accent);
 }
 
 .settings-theme-swatch.active .settings-theme-swatch-circle {
-  border-width: 5px;
-  box-shadow: 0 0 0 2px var(--swatch-accent);
+  border-width: 0.25rem;
+  box-shadow: 0 0 0 0.1rem var(--swatch-accent);
 }
 
 .settings-theme-swatch-name {
@@ -225,14 +225,14 @@
   font-weight: 600;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 32.5rem) {
   .settings-theme-grid {
     grid-template-columns: repeat(5, 1fr);
     gap: var(--space-2);
   }
   .settings-theme-swatch-circle {
-    width: 36px;
-    height: 36px;
+    width: 1.8rem;
+    height: 1.8rem;
   }
   .settings-theme-swatch-name {
     font-size: 0.625rem;
@@ -246,7 +246,7 @@
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
   background-color: transparent;
-  border: 1px solid var(--color-danger);
+  border: 0.05rem solid var(--color-danger);
   border-radius: var(--radius-lg);
   color: var(--color-danger);
   font-size: 0.9375rem;
@@ -271,8 +271,8 @@
 }
 
 .settings-profile-avatar {
-  width: 52px;
-  height: 52px;
+  width: 2.6rem;
+  height: 2.6rem;
   border-radius: var(--radius-full);
   overflow: hidden;
   flex-shrink: 0;
@@ -297,7 +297,7 @@
 .settings-profile-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.1rem;
   flex: 1;
   min-width: 0;
 }
