@@ -58,15 +58,6 @@ export default function Sidebar() {
           <span className="sidebar-label">{t('sidebar.search')}</span>
         </NavLink>
 
-        <NavLink to="/settings" className={navClass}>
-          <IconSettings />
-          <span className="sidebar-label">{t('sidebar.settings')}</span>
-        </NavLink>
-
-        <NavLink to="/profile" className={navClass}>
-          <IconUser />
-          <span className="sidebar-label">{t('sidebar.profile')}</span>
-        </NavLink>
       </nav>
 
       {/* ── Switch de mode (desktop uniquement) ── */}
@@ -82,6 +73,10 @@ export default function Sidebar() {
       <div className="sidebar-spacer" />
 
       <div className="sidebar-footer">
+        <NavLink to="/settings" className={navClass}>
+          <IconSettings />
+          <span className="sidebar-label">{t('sidebar.settings')}</span>
+        </NavLink>
         <button className="sidebar-item sidebar-clock" onClick={toggleClockFormat} title={clockFormat === '24h' ? '12h' : '24h'}>
           <IconClock />
           <span className="sidebar-label sidebar-clock-time">{time}</span>

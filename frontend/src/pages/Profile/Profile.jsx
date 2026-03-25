@@ -223,6 +223,7 @@ export default function Profile() {
                   <input
                     className="profile-input"
                     type="password"
+                    autoComplete="current-password"
                     placeholder={t('profile.currentPassword')}
                     value={verifyPwd}
                     onChange={e => setVerifyPwd(e.target.value)}
@@ -285,6 +286,7 @@ export default function Profile() {
                   id="cur-pwd"
                   className="profile-input"
                   type="password"
+                  autoComplete="current-password"
                   value={currentPwd}
                   onChange={e => setCurrentPwd(e.target.value)}
                   required
@@ -298,6 +300,7 @@ export default function Profile() {
                   id="new-pwd"
                   className="profile-input"
                   type="password"
+                  autoComplete="new-password"
                   value={newPwd}
                   onChange={e => setNewPwd(e.target.value)}
                   required
@@ -312,6 +315,7 @@ export default function Profile() {
                   id="conf-pwd"
                   className="profile-input"
                   type="password"
+                  autoComplete="new-password"
                   value={confirmPwd}
                   onChange={e => setConfirmPwd(e.target.value)}
                   required

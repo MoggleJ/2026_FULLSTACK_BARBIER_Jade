@@ -285,9 +285,16 @@ admin → tout + CRUD apps/catégories/users, lecture logs
 ### Thèmes
 ```js
 document.documentElement.setAttribute('data-theme', theme);
-// Valeurs : 'dark' | 'dark-blue' | 'dark-purple' | 'amoled' | 'dark-green'
-//         | 'light' | 'light-warm' | 'light-blue' | 'light-purple' | 'light-green'
+// 14 valeurs :
+// Sombres  : 'dark' | 'dark-blue' | 'dark-purple' | 'amoled' | 'dark-green' | 'dark-red' | 'dark-contrast'
+// Clairs   : 'light' | 'light-warm' | 'light-blue' | 'light-purple' | 'light-green' | 'light-red' | 'light-contrast'
 ```
+
+### Profil dans la sidebar
+- **Pas de lien "Profil" dans la barre de navigation** — la sidebar n'a que Home, All Apps, Search
+- Le lien Settings est positionné **au-dessus de l'horloge** dans le footer de la sidebar
+- La page Settings affiche une **carte profil** (avatar + pseudo + bouton "Modifier le profil") en haut
+- Le bouton "Modifier le profil" navigue vers `/profile`
 
 ---
 

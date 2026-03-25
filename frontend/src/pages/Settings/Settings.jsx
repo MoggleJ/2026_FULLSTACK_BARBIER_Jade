@@ -28,7 +28,11 @@ const THEMES = [
   { id: 'light-warm',   bg: '#fffbeb', accent: '#d97706' },
   { id: 'light-blue',   bg: '#f0f9ff', accent: '#0284c7' },
   { id: 'light-purple', bg: '#faf5ff', accent: '#7c3aed' },
-  { id: 'light-green',  bg: '#f0fdf4', accent: '#16a34a' },
+  { id: 'light-green',    bg: '#f0fdf4', accent: '#16a34a' },
+  { id: 'dark-red',       bg: '#1c0a0a', accent: '#ef4444' },
+  { id: 'light-red',      bg: '#fff5f5', accent: '#dc2626' },
+  { id: 'dark-contrast',  bg: '#000000', accent: '#ffffff' },
+  { id: 'light-contrast', bg: '#ffffff', accent: '#000000' },
 ];
 import './Settings.css';
 
@@ -57,6 +61,25 @@ export default function Settings() {
       </div>
 
       <div className="settings-sections">
+
+        {/* ── Profil résumé ── */}
+        <section className="settings-section settings-profile-card">
+          <div className="settings-profile-row">
+            <div className="settings-profile-avatar">
+              {user?.avatar
+                ? <img src={`${import.meta.env.VITE_API_URL?.replace('/api', '')}${user.avatar}`} alt={user?.username} />
+                : <span className="settings-profile-initial">{user?.username?.[0]?.toUpperCase()}</span>
+              }
+            </div>
+            <div className="settings-profile-info">
+              <span className="settings-profile-name">{user?.username}</span>
+              <span className="settings-profile-role">{user?.role}</span>
+            </div>
+            <Link to="/profile" className="settings-toggle-btn settings-profile-edit-btn">
+              {t('settings.editProfile')}
+            </Link>
+          </div>
+        </section>
 
         {/* ── Apparence ── */}
         <section className="settings-section">

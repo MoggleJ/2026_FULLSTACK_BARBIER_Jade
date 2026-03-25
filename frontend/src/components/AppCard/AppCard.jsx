@@ -33,7 +33,7 @@ export default function AppCard({ app, onOpen, isFavorite = false, onToggleFavor
               loading="lazy"
               onLoad={() => setImgLoaded(true)}
               onError={() => setImgError(true)}
-              style={imgLoaded ? {} : { display: 'none' }}
+              style={imgLoaded ? {} : { opacity: 0, position: 'absolute' }}
             />
           </>
         ) : (
