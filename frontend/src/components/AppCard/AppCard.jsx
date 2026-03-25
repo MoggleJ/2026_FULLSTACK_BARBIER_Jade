@@ -3,6 +3,7 @@ import './AppCard.css';
 
 export default function AppCard({ app, onOpen, isFavorite = false, onToggleFavorite }) {
   const [imgError, setImgError] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const initial = app.name?.[0]?.toUpperCase() ?? '?';
 
   const handleFavorite = (e) => {
@@ -24,11 +25,17 @@ export default function AppCard({ app, onOpen, isFavorite = false, onToggleFavor
       )}
       <div className="app-card-icon">
         {app.icon && !imgError ? (
-          <img
-            src={app.icon}
-            alt={app.name}
-            onError={() => setImgError(true)}
-          />
+          <>
+            {!imgLoaded && <span className="app-card-skeleton" />}
+            <img
+              src={app.icon}
+              alt={app.name}
+              loading="lazy"
+              onLoad={() => setImgLoaded(true)}
+              onError={() => setImgError(true)}
+              style={imgLoaded ? {} : { display: 'none' }}
+            />
+          </>
         ) : (
           <span className="app-card-initial">{initial}</span>
         )}

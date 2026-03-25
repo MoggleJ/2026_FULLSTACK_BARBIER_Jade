@@ -10,6 +10,7 @@ import {
   IconTV,
   IconDesktop,
   IconSettings,
+  IconUser,
   IconClock,
 } from '../icons/icons.jsx';
 import './Sidebar.css';
@@ -60,6 +61,11 @@ export default function Sidebar() {
         <NavLink to="/settings" className={navClass}>
           <IconSettings />
           <span className="sidebar-label">{t('sidebar.settings')}</span>
+        </NavLink>
+
+        <NavLink to="/profile" className={navClass}>
+          <IconUser />
+          <span className="sidebar-label">{t('sidebar.profile')}</span>
         </NavLink>
       </nav>
 

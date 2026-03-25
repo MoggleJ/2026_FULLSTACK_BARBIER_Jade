@@ -44,6 +44,7 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+      - uploads:/app/uploads
     ports:
       - "5000:5000"
     depends_on:
@@ -62,6 +63,8 @@ services:
     restart: unless-stopped
     environment:
       VITE_API_URL: http://localhost:5000/api
+      VITE_OAUTH_GOOGLE_ENABLED: ${VITE_OAUTH_GOOGLE_ENABLED:-false}
+      VITE_OAUTH_GITHUB_ENABLED: ${VITE_OAUTH_GITHUB_ENABLED:-false}
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -74,6 +77,7 @@ services:
 
 volumes:
   pgdata:
+  uploads:
 
 networks:
   app_network:

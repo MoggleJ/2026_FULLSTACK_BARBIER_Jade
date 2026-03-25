@@ -167,6 +167,78 @@
   background-color: color-mix(in srgb, var(--color-accent) 8%, var(--color-surface-hover));
 }
 
+/* Theme swatches */
+.settings-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-3);
+}
+
+.settings-theme-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: 2px solid transparent;
+  border-radius: var(--radius-xl);
+  background: none;
+  cursor: pointer;
+  transition: border-color 150ms;
+}
+
+.settings-theme-swatch:hover {
+  border-color: var(--swatch-accent);
+}
+
+.settings-theme-swatch.active {
+  border-color: var(--swatch-accent);
+  background-color: color-mix(in srgb, var(--swatch-accent) 8%, transparent);
+}
+
+.settings-theme-swatch-circle {
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background-color: var(--swatch-bg);
+  border: 3px solid var(--swatch-accent);
+}
+
+.settings-theme-swatch.active .settings-theme-swatch-circle {
+  border-width: 5px;
+  box-shadow: 0 0 0 2px var(--swatch-accent);
+}
+
+.settings-theme-swatch-name {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.settings-theme-swatch.active .settings-theme-swatch-name {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+@media (max-width: 520px) {
+  .settings-theme-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-2);
+  }
+  .settings-theme-swatch-circle {
+    width: 36px;
+    height: 36px;
+  }
+  .settings-theme-swatch-name {
+    font-size: 0.625rem;
+  }
+}
+
 /* Logout button */
 .settings-logout-btn {
   display: flex;

@@ -8,9 +8,16 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 CREATE TABLE IF NOT EXISTS users (
   id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   username      VARCHAR(100) UNIQUE NOT NULL,
-  password_hash TEXT NOT NULL,
-  role          VARCHAR(20) NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin'))
+  password_hash TEXT NOT NULL DEFAULT '',   -- vide pour comptes OAuth
+  role          VARCHAR(20) NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin')),
+  email         VARCHAR(255) UNIQUE,        -- sprint 8
+  avatar        TEXT                        -- sprint 8
 );
+
+-- Sprint 8 migration (no-op si les colonnes existent déjà)
+ALTER TABLE users ADD COLUMN IF NOT EXISTS email  VARCHAR(255) UNIQUE;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar TEXT;
+ALTER TABLE users ALTER COLUMN password_hash SET DEFAULT '';
 
 CREATE TABLE IF NOT EXISTS categories (
   id   SERIAL PRIMARY KEY,

@@ -1,9 +1,13 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import passport from './config/passport.js';
 import pool from './db.js';
 import apiRouter from './routes/routes.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,6 +27,9 @@ app.get('/api/health', async (_req, res) => {
     res.status(500).json({ status: 'error', db: 'disconnected', message: err.message });
   }
 });
+
+// Static uploads (avatars)
+app.use('/uploads', express.static('/app/uploads'));
 
 app.use('/api', apiRouter);
 

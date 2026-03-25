@@ -10,8 +10,6 @@ import { useLayout } from '../../hooks/useLayout.js';
 import { useSettings } from '../../hooks/useSettings.js';
 import {
   IconClock,
-  IconSun,
-  IconMoon,
   IconTV,
   IconDesktop,
   IconLogout,
@@ -19,6 +17,19 @@ import {
   IconGrid,
   IconList,
 } from '../../components/icons/icons.jsx';
+
+const THEMES = [
+  { id: 'dark',         bg: '#18181b', accent: '#0ea5e9' },
+  { id: 'dark-blue',    bg: '#0f172a', accent: '#60a5fa' },
+  { id: 'dark-purple',  bg: '#1a1030', accent: '#a78bfa' },
+  { id: 'amoled',       bg: '#000000', accent: '#22d3ee' },
+  { id: 'dark-green',   bg: '#14532d', accent: '#34d399' },
+  { id: 'light',        bg: '#f9fafb', accent: '#0284c7' },
+  { id: 'light-warm',   bg: '#fffbeb', accent: '#d97706' },
+  { id: 'light-blue',   bg: '#f0f9ff', accent: '#0284c7' },
+  { id: 'light-purple', bg: '#faf5ff', accent: '#7c3aed' },
+  { id: 'light-green',  bg: '#f0fdf4', accent: '#16a34a' },
+];
 import './Settings.css';
 
 export default function Settings() {
@@ -50,20 +61,22 @@ export default function Settings() {
         {/* ── Apparence ── */}
         <section className="settings-section">
           <h2 className="settings-section-title">{t('settings.appearance')}</h2>
-          <div className="settings-row">
-            <div className="settings-row-info">
-              <span className="settings-row-label">{t('settings.theme')}</span>
-              <span className="settings-row-desc">
-                {theme === 'dark' ? t('settings.darkEnabled') : t('settings.lightEnabled')}
-              </span>
-            </div>
-            <button
-              className="settings-toggle-btn"
-              onClick={() => applyTheme(theme === 'dark' ? 'light' : 'dark')}
-            >
-              {theme === 'dark' ? <IconSun /> : <IconMoon />}
-              <span>{theme === 'dark' ? t('settings.toLight') : t('settings.toDark')}</span>
-            </button>
+          <div className="settings-row-info" style={{ marginBottom: 'var(--space-4)' }}>
+            <span className="settings-row-label">{t('settings.themeLabel')}</span>
+          </div>
+          <div className="settings-theme-grid">
+            {THEMES.map(({ id, bg, accent }) => (
+              <button
+                key={id}
+                className={`settings-theme-swatch${theme === id ? ' active' : ''}`}
+                onClick={() => applyTheme(id)}
+                title={t(`settings.themes.${id}`)}
+                style={{ '--swatch-bg': bg, '--swatch-accent': accent }}
+              >
+                <span className="settings-theme-swatch-circle" />
+                <span className="settings-theme-swatch-name">{t(`settings.themes.${id}`)}</span>
+              </button>
+            ))}
           </div>
         </section>
 
