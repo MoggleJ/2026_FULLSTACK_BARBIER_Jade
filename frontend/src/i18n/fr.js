@@ -72,6 +72,7 @@ export default {
     continueWithGoogle: 'Continuer avec Google',
     continueWithGitHub: 'Continuer avec GitHub',
     oauthError: 'Échec de la connexion OAuth. Réessayez.',
+    oauthAdminError: 'La connexion via OAuth est réservée aux utilisateurs standard.',
     login: {
       title: 'Connexion',
       subtitle: 'Accédez à votre hub personnel',

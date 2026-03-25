@@ -72,6 +72,7 @@ export default {
     continueWithGoogle: 'Continue with Google',
     continueWithGitHub: 'Continue with GitHub',
     oauthError: 'OAuth sign-in failed. Please try again.',
+    oauthAdminError: 'OAuth sign-in is reserved for standard users.',
     login: {
       title: 'Login',
       subtitle: 'Access your personal hub',

@@ -13,37 +13,47 @@ router.post('/logout', logout);
 router.get('/me', requireAuth, getMe);
 
 // ── OAuth Google ────────────────────────────────────────────────────────────
-router.get('/google',
-  passport.authenticate('google', { scope: ['profile'], session: false })
-);
+if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  router.get('/google',
+    passport.authenticate('google', { scope: ['profile'], session: false })
+  );
 
-router.get('/google/callback',
-  passport.authenticate('google', { session: false, failureRedirect: `${FRONTEND_URL}/login?error=oauth` }),
-  (req, res) => {
-    const token = jwt.sign(
-      { id: req.user.id, role: req.user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
-    res.redirect(`${FRONTEND_URL}/oauth/callback?token=${token}`);
-  }
-);
+  router.get('/google/callback',
+    passport.authenticate('google', { session: false, failureRedirect: `${FRONTEND_URL}/login?error=oauth` }),
+    (req, res) => {
+      if (req.user.role === 'admin') {
+        return res.redirect(`${FRONTEND_URL}/login?error=oauth_admin`);
+      }
+      const token = jwt.sign(
+        { id: req.user.id, role: req.user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: '7d' }
+      );
+      res.redirect(`${FRONTEND_URL}/oauth/callback?token=${token}`);
+    }
+  );
+}
 
 // ── OAuth GitHub ────────────────────────────────────────────────────────────
-router.get('/github',
-  passport.authenticate('github', { scope: ['user:email'], session: false })
-);
+if (process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET) {
+  router.get('/github',
+    passport.authenticate('github', { scope: ['user:email'], session: false })
+  );
 
-router.get('/github/callback',
-  passport.authenticate('github', { session: false, failureRedirect: `${FRONTEND_URL}/login?error=oauth` }),
-  (req, res) => {
-    const token = jwt.sign(
-      { id: req.user.id, role: req.user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
-    res.redirect(`${FRONTEND_URL}/oauth/callback?token=${token}`);
-  }
-);
+  router.get('/github/callback',
+    passport.authenticate('github', { session: false, failureRedirect: `${FRONTEND_URL}/login?error=oauth` }),
+    (req, res) => {
+      if (req.user.role === 'admin') {
+        return res.redirect(`${FRONTEND_URL}/login?error=oauth_admin`);
+      }
+      const token = jwt.sign(
+        { id: req.user.id, role: req.user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: '7d' }
+      );
+      res.redirect(`${FRONTEND_URL}/oauth/callback?token=${token}`);
+    }
+  );
+}
 
 export default router;

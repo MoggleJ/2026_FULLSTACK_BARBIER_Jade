@@ -12,7 +12,11 @@ export default function Login() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [form, setForm] = useState({ username: '', password: '' });
-  const [error, setError] = useState(searchParams.get('error') === 'oauth' ? t('auth.oauthError') : '');
+  const errorParam = searchParams.get('error');
+  const [error, setError] = useState(
+    errorParam === 'oauth_admin' ? t('auth.oauthAdminError') :
+    errorParam === 'oauth'       ? t('auth.oauthError') : ''
+  );
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) =>

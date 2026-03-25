@@ -1,5 +1,6 @@
 import { handle } from '../utils/handle.js';
 import * as appsService from '../services/apps-service.js';
+import { log } from '../services/log-service.js';
 
 export const getAll = handle(async (req, res) => {
   const apps = await appsService.getAll(req.query.mode);
@@ -8,6 +9,7 @@ export const getAll = handle(async (req, res) => {
 
 export const getById = handle(async (req, res) => {
   const app = await appsService.getById(req.params.id);
+  await log(req.user?.id ?? null, 'app_launch', { app_id: app.id, app_name: app.name });
   res.json({ app });
 });
 

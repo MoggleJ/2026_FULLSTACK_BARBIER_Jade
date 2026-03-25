@@ -1,4 +1,4 @@
-# Cahier des charges — MJQbe WEB version (Enrichi)
+# Cahier des charges — MJQbe WEB version 
 
 ## 1. Présentation générale du projet
 Le projet **MJQbe WEB** consiste à concevoir une application web servant de hub permettant d'accéder à différentes applications en ligne via une interface.
@@ -248,9 +248,9 @@ Cette version ne prend pas en charge :
 ### 🏃 Sprint 7 *(Release avancée 1)* : Favoris, OAuth & Logs
 *Objectif : Enrichir l'application avec les fonctionnalités avancées de la release 1.*
 
-- [ ] Système de **Favoris** : Ajouter/Supprimer une application de ses favoris utilisateur.
-- [ ] Intégration **OAuth 2.0** : Connexion via Google ou GitHub.
-- [ ] Création de la table `Logs` et enregistrement des actions majeures (connexions, lancements d'apps).
+- [x] Système de **Favoris** : Ajouter/Supprimer une application de ses favoris utilisateur.
+- [x] Intégration **OAuth 2.0** : Connexion via Google ou GitHub.
+- [x] Création de la table `Logs` et enregistrement des actions majeures (connexions, lancements d'apps).
 
 ---
 
@@ -258,4 +258,6 @@ Cette version ne prend pas en charge :
 *Objectif : Finaliser les fonctionnalités avancées et optimiser les performances.*
 
 - [ ] **Thèmes personnalisés** : Sélection et persistance du thème par l'utilisateur.
+- [ ] Augmentation du nombre et election par l'utilisateur de thèmes disponibles, sombres et clairs. 
 - [ ] Optimisations de performance (lazy loading, mise en cache des assets).
+- [ ] **Profils personnalisés** : l'utilisateur peut changer sa photo de profil, son pseudo (en le gardant unique), son e-mail et Mot de Passe ou compte connecté (implicant une vérification d'identité avant le changement).
