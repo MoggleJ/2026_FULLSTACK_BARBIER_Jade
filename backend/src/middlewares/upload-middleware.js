@@ -1,9 +1,12 @@
 import multer from 'multer';
 import path from 'path';
 import crypto from 'crypto';
+import fs from 'fs';
 
-const UPLOADS_DIR   = '/app/uploads';
+const UPLOADS_DIR   = '/app/uploads/avatars';
 const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+
+fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 
 const storage = multer.diskStorage({
   destination: UPLOADS_DIR,

@@ -29,7 +29,7 @@ app.get('/api/health', async (_req, res) => {
 });
 
 // Static uploads (avatars)
-app.use('/uploads', express.static('/app/uploads'));
+app.use('/uploads/avatars', express.static('/app/uploads/avatars'));
 
 app.use('/api', apiRouter);
 

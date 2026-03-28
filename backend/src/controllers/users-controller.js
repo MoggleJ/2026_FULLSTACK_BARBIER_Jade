@@ -57,7 +57,7 @@ export async function changePassword(req, res) {
 export async function uploadAvatar(req, res) {
   if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
   try {
-    const avatarPath = `/uploads/${req.file.filename}`;
+    const avatarPath = `/uploads/avatars/${req.file.filename}`;
     const result     = await userService.saveAvatar(req.user.id, avatarPath);
     res.json({ avatar: result.avatar });
   } catch (err) {
