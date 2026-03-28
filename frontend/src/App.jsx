@@ -18,8 +18,11 @@ const AllApps      = lazy(() => import('./pages/AllApps/AllApps.jsx'));
 const Search       = lazy(() => import('./pages/Search/Search.jsx'));
 const Settings     = lazy(() => import('./pages/Settings/Settings.jsx'));
 const AppViewer    = lazy(() => import('./pages/AppViewer/AppViewer.jsx'));
-const AdminApps    = lazy(() => import('./pages/Admin/AdminApps.jsx'));
-const AdminUsers   = lazy(() => import('./pages/Admin/AdminUsers.jsx'));
+const AdminBoard       = lazy(() => import('./pages/Admin/AdminBoard.jsx'));
+const AdminApps        = lazy(() => import('./pages/Admin/AdminApps.jsx'));
+const AdminUsers       = lazy(() => import('./pages/Admin/AdminUsers.jsx'));
+const AdminCategories  = lazy(() => import('./pages/Admin/AdminCategories.jsx'));
+const AdminLogs        = lazy(() => import('./pages/Admin/AdminLogs.jsx'));
 const Profile      = lazy(() => import('./pages/Profile/Profile.jsx'));
 const NotFound     = lazy(() => import('./pages/NotFound/NotFound.jsx'));
 
@@ -62,8 +65,11 @@ export default function App() {
                     <Route path="/settings"   element={<Settings />} />
                     <Route path="/profile"    element={<Profile />} />
                     <Route path="/viewer/:id" element={<AppViewer />} />
-                    <Route path="/admin"       element={<AdminApps />} />
-                    <Route path="/admin/users" element={<AdminUsers />} />
+                    <Route path="/admin"             element={<AdminBoard />} />
+                    <Route path="/admin/apps"        element={<AdminApps />} />
+                    <Route path="/admin/users"       element={<AdminUsers />} />
+                    <Route path="/admin/categories"  element={<AdminCategories />} />
+                    <Route path="/admin/logs"        element={<AdminLogs />} />
                     <Route path="*"           element={<NotFound />} />
                   </Route>
                 </Routes>

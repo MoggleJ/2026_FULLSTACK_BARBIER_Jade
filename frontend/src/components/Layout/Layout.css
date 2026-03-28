@@ -11,7 +11,7 @@
   min-width: 0;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 63.9375rem) {
   .layout-main {
     padding-top: var(--mobile-header-height);
     padding-bottom: var(--mobile-nav-height);

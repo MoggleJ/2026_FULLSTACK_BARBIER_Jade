@@ -1,61 +1,101 @@
 # MJQbe WEB
 
-Hub web unifié pour accéder à vos applications en ligne (streaming, productivité, outils) depuis une interface unique.
-Deux modes : **MJ TV** (grand écran, icônes larges) et **MJ Desktop** (compact, orienté productivité).
+**MJQbe WEB** est un hub web unifié permettant d'accéder à vos applications en ligne (streaming, productivité, outils) depuis une seule interface. L'application propose deux modes d'affichage : **MJ TV** orienté consommation de contenu (icônes larges, grand écran) et **MJ Desktop** orienté productivité (vue compacte). Chaque utilisateur peut personnaliser son thème, sa langue, ses favoris et son profil.
 
 ---
 
-## Stack
+## Stack technique
 
 | Couche | Technologie |
 |--------|-------------|
 | Frontend | React 18 + Vite, React Router v6, CSS vanilla |
 | Backend | Node.js + Express, JWT, Bcrypt |
-| Base de données | PostgreSQL 16 |
-| Infra | Docker + Docker Compose, Nginx (prod) |
+| OAuth | Passport.js (Google, GitHub) — optionnel |
+| Upload | Multer (avatars) |
+| Base de données | PostgreSQL 16 (driver `pg` natif) |
+| Infra | Docker + Docker Compose |
+| Prod | Nginx (sert le frontend statique) |
 
 ---
 
-## Lancer le projet
+## Installation et lancement
 
-### Développement
+### 1. Configurer les variables d'environnement
+
+Copier et remplir les fichiers d'exemple :
 
 ```bash
-# Copier les fichiers d'environnement
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
+```
 
-# Lancer tous les services
+**`backend/.env`** — variables obligatoires :
+
+```env
+PORT=5000
+DATABASE_URL=postgresql://user:password@db:5432/mjqbe
+JWT_SECRET=changez_moi_en_production
+BCRYPT_ROUNDS=10
+CORS_ORIGIN=http://localhost:5173
+FRONTEND_URL=http://localhost:5173
+BACKEND_URL=http://localhost:5000
+
+# OAuth Google (laisser vide pour désactiver)
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+# OAuth GitHub (laisser vide pour désactiver)
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+```
+
+**`frontend/.env`** :
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+### 2. Lancer avec Docker
+
+```bash
 docker-compose up --build
 ```
 
-- Frontend : http://localhost:5173
-- Backend  : http://localhost:5000
-- DB       : interne uniquement (non exposée)
+- Frontend : [http://localhost:5173](http://localhost:5173)
+- Backend API : [http://localhost:5000/api](http://localhost:5000/api)
+- Base de données : réseau interne Docker uniquement (non exposée)
 
-### Production
+### 3. Créer le premier compte admin
 
-```bash
-# Définir l'URL de l'API publique
-export VITE_API_URL=https://votre-domaine.com/api
-
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
-```
-
-- Frontend servi par Nginx sur le port **80**
-
----
-
-## Créer un compte admin
-
-Au premier lancement, créez un compte via l'interface Register, puis passez le rôle en `admin` directement en base :
+Au premier lancement, créez un compte via l'interface **Register**, puis promouvez-le en admin directement en base :
 
 ```bash
 docker exec -it mjqbe_db psql -U user -d mjqbe \
   -c "UPDATE users SET role = 'admin' WHERE username = 'votre_username';"
 ```
 
-Les admins peuvent créer, modifier et supprimer des applications et catégories via l'API.
+Les comptes admin ont accès au tableau de bord d'administration via le menu de la sidebar.
+
+---
+
+## Ce que permet l'application
+
+### Pour tous les utilisateurs connectés
+
+- **Hub d'applications** : parcourir et ouvrir des applications en mode TV ou Desktop
+- **Deux modes d'ouverture** : dans un iframe intégré, ou dans un nouvel onglet (selon la config de l'app)
+- **Recherche** : filtrer les applications par nom
+- **Favoris** : épingler ses applications préférées
+- **Applications récentes** : retrouver rapidement ce qui a été ouvert
+- **Paramètres personnalisés** : thème (14 options sombres/claires), mode, taille des icônes, langue (fr/en), format de l'heure
+- **Profil** : modifier son pseudo, son email, son avatar (upload), son mot de passe
+
+### Pour les administrateurs
+
+- **Gestion des applications** : créer, modifier, supprimer des apps (nom, icône, URL, catégorie, mode, externe/iframe)
+- **Gestion des catégories** : créer, modifier, supprimer des catégories par mode
+- **Gestion des utilisateurs** : rechercher, changer le rôle, supprimer des comptes
+- **Logs d'activité** : consulter les actions enregistrées (connexions, lancements d'apps)
 
 ---
 
@@ -63,95 +103,189 @@ Les admins peuvent créer, modifier et supprimer des applications et catégories
 
 Toutes les routes sont préfixées par `/api`.
 
-### Auth (public)
+### Auth — public
 
 | Méthode | Route | Description |
 |---------|-------|-------------|
 | POST | `/auth/register` | Créer un compte |
-| POST | `/auth/login` | Se connecter, retourne un JWT |
+| POST | `/auth/login` | Se connecter — retourne un JWT |
 | POST | `/auth/logout` | Déconnexion (stateless) |
-| GET  | `/auth/me` | Profil de l'utilisateur connecté |
+| GET | `/auth/me` | Profil de l'utilisateur connecté `[auth]` |
+| GET | `/auth/google` | Connexion via Google `[optionnel]` |
+| GET | `/auth/google/callback` | Callback OAuth Google |
+| GET | `/auth/github` | Connexion via GitHub `[optionnel]` |
+| GET | `/auth/github/callback` | Callback OAuth GitHub |
 
-### Applications (authentifié)
-
-| Méthode | Route | Description |
-|---------|-------|-------------|
-| GET    | `/apps?mode=TV\|Desktop` | Lister les apps par mode |
-| GET    | `/apps/:id` | Détail d'une app |
-| POST   | `/apps` | Créer une app *(admin)* |
-| PUT    | `/apps/:id` | Modifier une app *(admin)* |
-| DELETE | `/apps/:id` | Supprimer une app *(admin)* |
-
-### Catégories (authentifié)
+### Applications — `[auth]`
 
 | Méthode | Route | Description |
 |---------|-------|-------------|
-| GET    | `/categories?mode=TV\|Desktop` | Lister les catégories |
-| POST   | `/categories` | Créer une catégorie *(admin)* |
-| PUT    | `/categories/:id` | Modifier une catégorie *(admin)* |
-| DELETE | `/categories/:id` | Supprimer une catégorie *(admin)* |
+| GET | `/apps` | Lister les apps |
+| GET | `/apps/:id` | Détail d'une app |
+| POST | `/apps` | Créer une app `[admin]` |
+| PUT | `/apps/:id` | Modifier une app `[admin]` |
+| DELETE | `/apps/:id` | Supprimer une app `[admin]` |
 
-### Paramètres (authentifié)
+### Catégories — `[auth]`
 
 | Méthode | Route | Description |
 |---------|-------|-------------|
-| GET | `/settings` | Récupérer les paramètres de l'utilisateur |
+| GET | `/categories` | Lister les catégories |
+| POST | `/categories` | Créer une catégorie `[admin]` |
+| PUT | `/categories/:id` | Modifier une catégorie `[admin]` |
+| DELETE | `/categories/:id` | Supprimer une catégorie `[admin]` |
+
+### Paramètres — `[auth]`
+
+| Méthode | Route | Description |
+|---------|-------|-------------|
+| GET | `/settings` | Récupérer les paramètres |
 | PUT | `/settings` | Mettre à jour les paramètres |
 
-**Corps PUT /settings (partiel accepté) :**
+Corps `PUT /settings` (tous les champs sont optionnels) :
 ```json
 {
-  "theme": "dark | light",
-  "mode": "TV | Desktop",
-  "layout": "grid | list",
-  "icon_size": { "TV": "small | medium | large", "Desktop": "small | medium | large" }
+  "theme": "dark",
+  "mode": "TV",
+  "layout": "grid",
+  "icon_size": { "TV": "medium", "Desktop": "medium" }
 }
 ```
 
-### Authentification
+### Favoris — `[auth]`
 
-Toutes les routes protégées nécessitent un header :
+| Méthode | Route | Description |
+|---------|-------|-------------|
+| GET | `/favorites` | Lister ses favoris |
+| POST | `/favorites/:appId` | Ajouter un favori |
+| DELETE | `/favorites/:appId` | Retirer un favori |
+
+### Profil utilisateur — `[auth]`
+
+| Méthode | Route | Description |
+|---------|-------|-------------|
+| GET | `/users/profile` | Récupérer son profil |
+| PUT | `/users/profile` | Modifier pseudo / email |
+| PUT | `/users/password` | Changer son mot de passe |
+| POST | `/users/avatar` | Uploader un avatar (multipart/form-data) |
+| DELETE | `/users/avatar` | Supprimer son avatar |
+
+### Administration — `[admin]`
+
+| Méthode | Route | Description |
+|---------|-------|-------------|
+| GET | `/admin/users` | Lister les utilisateurs (pagination + recherche) |
+| PUT | `/admin/users/:id/role` | Changer le rôle d'un utilisateur |
+| DELETE | `/admin/users/:id` | Supprimer un utilisateur |
+| GET | `/logs` | Consulter les logs d'activité |
+
+### Authentification des requêtes
+
+Toutes les routes marquées `[auth]` nécessitent le header :
 ```
 Authorization: Bearer <token>
 ```
+
+Le token JWT est retourné lors du login et stocké côté client dans `localStorage` (clé : `mjqbe_token`). Il expire après **7 jours**.
 
 ---
 
 ## Architecture
 
+### Backend — Clean Architecture
+
 ```
 backend/src/
-├── repositories/   # Accès DB (SQL uniquement)
-├── services/       # Logique métier + validation
-├── controllers/    # Handlers HTTP (délèguent aux services)
-├── routes/         # Définition des routes + middlewares
-├── middlewares/    # auth-middleware, role-middleware
-└── utils/          # handle() wrapper async/erreurs
-
-frontend/src/
-├── api/            # Couche fetch centralisée (apiFetch)
-├── context/        # 6 providers : Auth, Theme, Mode, Lang, ClockFormat, IconSize, Layout
-├── hooks/          # Hooks métier (useSettings, useApps, useOpenApp…)
-├── components/     # Sidebar, Layout, AppGrid, AppCard
-└── pages/          # Home, AllApps, Search, Settings, AppViewer, NotFound
+├── routes/          # Définition des routes + application des middlewares
+├── controllers/     # Handlers HTTP — appellent les services, répondent
+├── services/        # Logique métier et validation
+├── repositories/    # Accès base de données (SQL uniquement)
+├── middlewares/     # auth-middleware (JWT), role-middleware (admin)
+├── config/          # Configuration Passport.js (OAuth)
+└── utils/           # handle() — wrapper async/gestion d'erreurs
 ```
+
+Flux d'une requête : `routes → middlewares → controllers → services → repositories → DB`
+
+### Frontend — Structure par fonctionnalité
+
+```
+frontend/src/
+├── api/             # Couche fetch centralisée (apiFetch avec JWT)
+├── context/         # Providers globaux : Auth, Theme, Mode, Lang, ClockFormat, IconSize, Layout
+├── hooks/           # Hooks métier : useSettings, useApps, useFavorites, useOpenApp, useRecentApps…
+├── components/
+│   ├── Layout/      # Conteneur principal (sidebar + contenu)
+│   ├── Sidebar/     # Navigation, profil, horloge, footer
+│   ├── MobileHeader/# En-tête responsive mobile
+│   ├── AppGrid/     # Grille d'affichage des applications
+│   └── AppCard/     # Carte individuelle d'une application
+├── pages/
+│   ├── Home/        # Page d'accueil — favoris + récents
+│   ├── AllApps/     # Toutes les applications par catégorie
+│   ├── Search/      # Recherche en temps réel
+│   ├── AppViewer/   # Iframe ou redirection externe
+│   ├── Settings/    # Paramètres + carte profil
+│   ├── Profile/     # Modification du profil et du mot de passe
+│   ├── Admin/       # Tableau de bord admin (Apps, Catégories, Utilisateurs, Logs)
+│   ├── Auth/        # Login / Register / OAuth
+│   └── NotFound/    # Page 404
+└── i18n/            # Traductions fr.js / en.js
+```
+
+### Infrastructure Docker
+
+```
+[Navigateur]
+     │
+     ├── :80   → [Nginx]  → build Vite statique (prod)
+     │   :5173 → [Vite]   → dev server (dev)
+     │
+     └── :5000 → [Express / Backend]
+                      │
+               [db_network isolé]
+                      │
+               [PostgreSQL]  ← non accessible publiquement
+```
+
+Deux réseaux Docker :
+- `app_network` — communication frontend ↔ backend
+- `db_network` — communication backend ↔ base de données (isolé)
+
+### Modèle de données
+
+| Table | Contenu |
+|-------|---------|
+| `users` | Comptes utilisateurs (id UUID, username, password_hash, role, email, avatar) |
+| `settings` | Préférences par utilisateur (theme, mode, layout, icon_size, selected_apps) |
+| `apps` | Applications référencées (name, icon, url, category_id, mode, is_external) |
+| `categories` | Catégories d'apps par mode TV ou Desktop |
+| `favorites` | Association user ↔ app |
+| `logs` | Historique d'actions (login, app_launch) |
+| `oauth_accounts` | Comptes OAuth liés (provider + provider_id) |
 
 ---
 
-## Variables d'environnement
+## Commandes utiles
 
-### Backend (`backend/.env`)
+```bash
+# Lancer tout le projet
+docker-compose up --build
 
-```env
-PORT=5000
-DATABASE_URL=postgresql://user:password@db:5432/mjqbe
-JWT_SECRET=change_me_in_production
-BCRYPT_ROUNDS=10
-CORS_ORIGIN=http://localhost:5173
-```
+# Accès à la base de données en CLI
+docker exec -it mjqbe_db psql -U user -d mjqbe
 
-### Frontend (`frontend/.env`)
+# Dev backend seul (hors Docker)
+cd backend && nodemon src/index.js
 
-```env
-VITE_API_URL=http://localhost:5000/api
+# Dev frontend seul (hors Docker)
+cd frontend && npm run dev
+
+# Linter
+npm run lint
+
+# Tests
+npm run test:backend
+npm run test:frontend
+npm run test:all
 ```

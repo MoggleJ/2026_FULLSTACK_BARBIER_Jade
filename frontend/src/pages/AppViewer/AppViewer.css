@@ -11,13 +11,13 @@
   gap: var(--space-4);
   padding: var(--space-3) var(--space-6);
   background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 0.05rem solid var(--color-border);
   flex-shrink: 0;
 }
 
 .app-viewer-back {
   background: none;
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text-muted);
   padding: var(--space-1) var(--space-3);
@@ -106,7 +106,7 @@
 
 .app-viewer-error button {
   background: none;
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text);
   padding: var(--space-2) var(--space-4);

@@ -1,6 +1,7 @@
+import { NavLink } from 'react-router-dom';
 import { useMode } from '../../hooks/useMode.js';
 import { useLang } from '../../hooks/useLang.js';
-import { IconTV, IconDesktop } from '../icons/icons.jsx';
+import { IconTV, IconDesktop, IconSettings } from '../icons/icons.jsx';
 import './MobileHeader.css';
 
 export default function MobileHeader() {
@@ -19,6 +20,13 @@ export default function MobileHeader() {
         {mode === 'TV' ? <IconDesktop /> : <IconTV />}
         <span>{mode === 'TV' ? t('sidebar.switchToDesktop') : t('sidebar.switchToTV')}</span>
       </button>
+      <NavLink
+        to="/settings"
+        className={({ isActive }) => `mobile-header-settings${isActive ? ' active' : ''}`}
+        title={t('sidebar.settings')}
+      >
+        <IconSettings />
+      </NavLink>
     </header>
   );
 }

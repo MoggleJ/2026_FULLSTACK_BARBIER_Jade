@@ -12,10 +12,10 @@ CREATE TABLE IF NOT EXISTS users (
   role          VARCHAR(20) NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin')),
   email         VARCHAR(255) UNIQUE,        -- sprint 8
   avatar        TEXT,                       -- sprint 8
-  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()  -- sprint 9
 );
 
--- Sprint 8 migration (no-op si les colonnes existent déjà)
+-- Migrations (no-op si les colonnes existent déjà)
 ALTER TABLE users ADD COLUMN IF NOT EXISTS email      VARCHAR(255) UNIQUE;
 ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar     TEXT;
 ALTER TABLE users ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
@@ -211,3 +211,11 @@ SELECT name, icon, url,
 FROM (VALUES
   ('Mon Portfolio',  'https://mogglej.github.io/Portfolio_2026/favicon.ico', 'https://mogglej.github.io/Portfolio_2026/')
 ) AS t(name, icon, url);
+
+-- ── Users par défaut (env) ───────────────────────────────────────────────────
+
+INSERT INTO users (username, password_hash, role)
+VALUES
+  ( current_setting('app.admin_username', true), crypt(current_setting('app.admin_password', true), gen_salt('bf')), 'admin' ),
+  ( current_setting('app.user_username', true), crypt(current_setting('app.user_password', true), gen_salt('bf')),  'user' )
+ON CONFLICT (username) DO NOTHING;

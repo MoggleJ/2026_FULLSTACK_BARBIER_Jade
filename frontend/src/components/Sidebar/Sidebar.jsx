@@ -3,6 +3,7 @@ import { useMode } from '../../hooks/useMode.js';
 import { useClock } from '../../hooks/useClock.js';
 import { useClockFormat } from '../../hooks/useClockFormat.js';
 import { useLang } from '../../hooks/useLang.js';
+import { useAuth } from '../../hooks/useAuth.js';
 import {
   IconHome,
   IconGrid,
@@ -10,7 +11,7 @@ import {
   IconTV,
   IconDesktop,
   IconSettings,
-  IconUser,
+  IconShield,
   IconClock,
 } from '../icons/icons.jsx';
 import './Sidebar.css';
@@ -18,6 +19,7 @@ import './Sidebar.css';
 export default function Sidebar() {
   const { mode, toggleMode } = useMode();
   const { t } = useLang();
+  const { user } = useAuth();
   const { clockFormat, toggleClockFormat } = useClockFormat();
   const time = useClock(clockFormat);
 
@@ -57,6 +59,13 @@ export default function Sidebar() {
           <IconSearch />
           <span className="sidebar-label">{t('sidebar.search')}</span>
         </NavLink>
+
+        {user?.role === 'admin' && (
+          <NavLink to="/admin" className={navClass}>
+            <IconShield />
+            <span className="sidebar-label">{t('sidebar.admin')}</span>
+          </NavLink>
+        )}
 
       </nav>
 

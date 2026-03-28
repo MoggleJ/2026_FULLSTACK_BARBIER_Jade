@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { IconHeart, IconHeartOutline } from '../icons/icons.jsx';
 import './AppCard.css';
 
 export default function AppCard({ app, onOpen, isFavorite = false, onToggleFavorite }) {
@@ -20,7 +21,7 @@ export default function AppCard({ app, onOpen, isFavorite = false, onToggleFavor
           title={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
           aria-label={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
         >
-          {isFavorite ? '♥' : '♡'}
+          {isFavorite ? <IconHeart /> : <IconHeartOutline />}
         </button>
       )}
       <div className="app-card-icon">

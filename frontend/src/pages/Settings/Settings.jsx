@@ -232,14 +232,14 @@ export default function Settings() {
         {/* ── Admin ── */}
         {user?.role === 'admin' && (
           <section className="settings-section">
-            <h2 className="settings-section-title">{t('admin.title')}</h2>
+            <h2 className="settings-section-title">{t('admin.boardTitle')}</h2>
             <div className="settings-row">
               <div className="settings-row-info">
-                <span className="settings-row-label">{t('admin.adminLink')}</span>
-                <span className="settings-row-desc">{t('admin.adminLinkDesc')}</span>
+                <span className="settings-row-label">{t('admin.boardTitle')}</span>
+                <span className="settings-row-desc">{t('admin.boardSubtitle')}</span>
               </div>
               <Link to="/admin" className="settings-toggle-btn">
-                {t('admin.adminLink')}
+                {t('admin.boardBadge')}
               </Link>
             </div>
           </section>

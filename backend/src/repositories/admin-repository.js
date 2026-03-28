@@ -35,6 +35,36 @@ export async function countUsers(search = '') {
   return rows[0].total;
 }
 
+export async function updateUser(userId, { username, email, role, passwordHash }) {
+  const setClauses = [];
+  const values     = [];
+  let   idx        = 1;
+  if (username     !== undefined) { setClauses.push(`username      = $${idx++}`); values.push(username);     }
+  if (email        !== undefined) { setClauses.push(`email         = $${idx++}`); values.push(email);        }
+  if (role         !== undefined) { setClauses.push(`role          = $${idx++}`); values.push(role);         }
+  if (passwordHash !== undefined) { setClauses.push(`password_hash = $${idx++}`); values.push(passwordHash); }
+  if (setClauses.length === 0) return null;
+  values.push(userId);
+  const { rows } = await pool.query(
+    `UPDATE users SET ${setClauses.join(', ')} WHERE id = $${idx}
+     RETURNING id, username, email, role, avatar`,
+    values
+  );
+  return rows[0] ?? null;
+}
+
+export async function createUser(username, passwordHash, role, email) {
+  const { rows } = await pool.query(
+    `INSERT INTO users (username, password_hash, role, email)
+     VALUES ($1, $2, $3, $4)
+     RETURNING id, username, email, role, avatar`,
+    [username, passwordHash, role, email ?? null]
+  );
+  const user = rows[0];
+  await pool.query('INSERT INTO settings (user_id) VALUES ($1)', [user.id]);
+  return user;
+}
+
 export async function setRole(userId, role) {
   const { rows } = await pool.query(
     `UPDATE users SET role = $1 WHERE id = $2 RETURNING id, username, role`,

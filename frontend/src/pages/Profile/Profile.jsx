@@ -4,6 +4,7 @@ import { useAuth } from '../../hooks/useAuth.js';
 import { useLang } from '../../hooks/useLang.js';
 import { IconCamera } from '../../components/icons/icons.jsx';
 import './Profile.css';
+import '../Settings/Settings.css';
 
 const BACKEND   = import.meta.env.VITE_API_URL?.replace('/api', '') ?? 'http://localhost:5000';
 const TOKEN_KEY = 'mjqbe_token';
@@ -181,7 +182,7 @@ export default function Profile() {
         {/* ── Infos profil ── */}
         <section className="settings-section">
           <h2 className="settings-section-title">{t('profile.title')}</h2>
-          <form onSubmit={handleSaveProfile} className="profile-form">
+          <form onSubmit={handleSaveProfile} className="profile-form" autoComplete="off">
 
             <div className="profile-field">
               <label className="settings-row-label" htmlFor="prof-username">
@@ -277,7 +278,7 @@ export default function Profile() {
             <p className="settings-row-desc" style={{ marginBottom: 'var(--space-4)' }}>
               {t('profile.passwordDesc')}
             </p>
-            <form onSubmit={handleSavePassword} className="profile-form">
+            <form onSubmit={handleSavePassword} className="profile-form" autoComplete="off">
               <div className="profile-field">
                 <label className="settings-row-label" htmlFor="cur-pwd">
                   {t('profile.currentPassword')}

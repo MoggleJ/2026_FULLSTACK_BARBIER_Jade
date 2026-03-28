@@ -18,6 +18,7 @@ export default function AdminApps() {
   const [apps, setApps] = useState([]);
   const [categories, setCategories] = useState([]);
   const [modeFilter, setModeFilter] = useState('all');
+  const [search, setSearch] = useState('');
   const [form, setForm] = useState(EMPTY_FORM);
   const [editingId, setEditingId] = useState(null);
   const [showForm, setShowForm] = useState(false);
@@ -44,9 +45,12 @@ export default function AdminApps() {
     );
   }
 
-  const filteredApps = modeFilter === 'all'
-    ? apps
-    : apps.filter((a) => a.mode === modeFilter);
+  const filteredApps = apps.filter((a) => {
+    const matchMode = modeFilter === 'all' || a.mode === modeFilter;
+    const q = search.trim().toLowerCase();
+    const matchSearch = !q || a.name.toLowerCase().includes(q) || a.url.toLowerCase().includes(q);
+    return matchMode && matchSearch;
+  });
 
   const filteredCategories = form.mode
     ? categories.filter((c) => c.mode === form.mode)
@@ -199,8 +203,15 @@ export default function AdminApps() {
         </form>
       )}
 
-      {/* ── Filtres + bouton ajout ── */}
+      {/* ── Filtres + recherche + bouton ajout ── */}
       <div className="admin-toolbar">
+        <input
+          className="admin-search"
+          type="search"
+          placeholder={t('admin.searchApp')}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <div className="admin-filters">
           {['all', 'TV', 'Desktop'].map((m) => (
             <button
@@ -212,9 +223,15 @@ export default function AdminApps() {
             </button>
           ))}
         </div>
-        <button className="admin-btn admin-btn--primary" onClick={openAdd}>
-          + {t('admin.addApp')}
-        </button>
+        
+        <div className="admin-toolbar-actions">
+          <Link to="/admin" className="admin-btn admin-btn--ghost">
+            ← {t('admin.boardBadge')}
+          </Link>
+          <button className="admin-btn admin-btn--primary" onClick={openAdd}>
+            + {t('admin.addApp')}
+          </button>
+        </div>
       </div>
 
       {/* ── Table des apps ── */}
@@ -225,8 +242,8 @@ export default function AdminApps() {
               <th>{t('admin.colIcon')}</th>
               <th>{t('admin.colName')}</th>
               <th>{t('admin.colMode')}</th>
-              <th>{t('admin.colCategory')}</th>
-              <th>{t('admin.colExternal')}</th>
+              <th className="admin-col-secondary">{t('admin.colCategory')}</th>
+              <th className="admin-col-secondary">{t('admin.colExternal')}</th>
               <th>{t('admin.colActions')}</th>
             </tr>
           </thead>
@@ -245,8 +262,8 @@ export default function AdminApps() {
                   <span className="admin-app-url">{app.url}</span>
                 </td>
                 <td><span className={`admin-badge admin-badge--${app.mode.toLowerCase()}`}>{app.mode}</span></td>
-                <td>{app.category_name ?? '—'}</td>
-                <td>{app.is_external ? '↗' : '▣'}</td>
+                <td className="admin-col-secondary">{app.category_name ?? '—'}</td>
+                <td className="admin-col-secondary">{app.is_external ? '↗' : '▣'}</td>
                 <td className="admin-col-actions">
                   <button className="admin-btn admin-btn--sm" onClick={() => openEdit(app)}>
                     {t('admin.edit')}

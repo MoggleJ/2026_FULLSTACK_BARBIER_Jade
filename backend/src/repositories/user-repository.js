@@ -10,7 +10,7 @@ export async function findByUsername(username) {
 
 export async function findById(id) {
   const { rows } = await pool.query(
-    'SELECT id, username, role FROM users WHERE id = $1',
+    'SELECT id, username, role, email, avatar FROM users WHERE id = $1',
     [id]
   );
   return rows[0] ?? null;

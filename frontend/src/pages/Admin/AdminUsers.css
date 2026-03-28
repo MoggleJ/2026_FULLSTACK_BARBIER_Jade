@@ -1,22 +1,5 @@
 /* Extends AdminApps.css — importe les mêmes classes de base */
 
-.admin-search {
-  flex: 1;
-  max-width: 360px;
-  padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-size: 0.9375rem;
-  transition: border-color 150ms;
-}
-
-.admin-search:focus {
-  outline: none;
-  border-color: var(--color-accent);
-}
-
 /* ── Sortable headers ─────────────────────────────────────────────────────── */
 .admin-users-th--sortable {
   cursor: pointer;
@@ -34,7 +17,7 @@
 
 .sort-indicator {
   font-size: 0.75rem;
-  margin-left: 2px;
+  margin-left: 0.1rem;
 }
 
 /* ── Role badges ─────────────────────────────────────────────────────────── */
@@ -77,18 +60,4 @@
 .admin-pagination-info {
   font-size: 0.875rem;
   color: var(--color-text-muted);
-}
-
-/* ── Responsive ──────────────────────────────────────────────────────────── */
-@media (max-width: 767px) {
-  .admin-search {
-    max-width: 100%;
-  }
-
-  .admin-table th:nth-child(3),
-  .admin-table td:nth-child(3),
-  .admin-table th:nth-child(5),
-  .admin-table td:nth-child(5) {
-    display: none;
-  }
 }

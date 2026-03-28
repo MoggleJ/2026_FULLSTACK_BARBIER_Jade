@@ -19,9 +19,9 @@
 
 .search-input {
   width: 100%;
-  padding: var(--space-4) var(--space-4) var(--space-4) 52px;
+  padding: var(--space-4) var(--space-4) var(--space-4) 2.6rem;
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
   border-radius: var(--radius-xl);
   color: var(--color-text);
   font-size: 1.125rem;
@@ -35,7 +35,7 @@
 
 .search-input:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
+  box-shadow: 0 0 0 0.15rem color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
 .search-hint {

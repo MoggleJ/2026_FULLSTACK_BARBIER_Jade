@@ -8,6 +8,6 @@ export async function log(userId, action, metadata = null) {
   }
 }
 
-export async function getLogs(limit, offset) {
+export async function getLogs({ limit, offset } = {}) {
   return logRepo.findAll({ limit, offset });
 }

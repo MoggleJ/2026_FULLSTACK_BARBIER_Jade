@@ -1,8 +1,17 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ADMIN — feuille de style partagée (AdminApps + AdminUsers + AdminCategories)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 /* ── Page container ─────────────────────────────────────────────────────── */
 .page-admin {
-  padding: var(--space-6);
-  max-width: 1100px;
+  padding: var(--space-6) var(--space-8);
+  max-width: 62rem;
   margin: 0 auto;
+}
+
+/* ── Page header (réutilise .page-header global) ────────────────────────── */
+.page-admin .page-header {
+  margin-bottom: var(--space-6);
 }
 
 /* ── Unauthorized ───────────────────────────────────────────────────────── */
@@ -21,8 +30,7 @@
 .admin-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  gap: var(--space-3);
   margin-bottom: var(--space-5);
   flex-wrap: wrap;
 }
@@ -33,9 +41,17 @@
   flex-wrap: wrap;
 }
 
+.admin-toolbar-actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
 .admin-filter-btn {
   padding: var(--space-2) var(--space-4);
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
   border-radius: var(--radius-md);
   background: none;
   color: var(--color-text-muted);
@@ -55,6 +71,25 @@
   color: #fff;
 }
 
+/* ── Search input (shared) ──────────────────────────────────────────────── */
+.admin-search {
+  flex: 1;
+  min-width: 10rem;
+  max-width: 20rem;
+  padding: var(--space-2) var(--space-4);
+  border: 0.05rem solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  transition: border-color 150ms;
+}
+
+.admin-search:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
 /* ── Buttons ────────────────────────────────────────────────────────────── */
 .admin-btn {
   display: inline-flex;
@@ -62,12 +97,13 @@
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
   background: none;
   color: var(--color-text);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
+  text-decoration: none;
   transition: background-color 150ms, color 150ms, opacity 150ms;
   white-space: nowrap;
 }
@@ -88,23 +124,23 @@
 }
 
 .admin-btn--primary:hover:not(:disabled) {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
+  opacity: 0.85;
 }
 
 .admin-btn--ghost {
   background: none;
-  border-color: var(--color-border);
+  border-color: transparent;
   color: var(--color-text-muted);
 }
 
 .admin-btn--ghost:hover {
+  background-color: var(--color-surface-hover);
   color: var(--color-text);
 }
 
 .admin-btn--danger {
   color: var(--color-error, #e74c3c);
-  border-color: var(--color-error, #e74c3c);
+  border-color: currentColor;
 }
 
 .admin-btn--danger:hover {
@@ -120,14 +156,14 @@
 /* ── Form ───────────────────────────────────────────────────────────────── */
 .admin-form {
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   margin-bottom: var(--space-6);
 }
 
 .admin-form-title {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: var(--space-5);
   color: var(--color-text);
@@ -140,7 +176,7 @@
   padding: var(--space-3) var(--space-4);
   background-color: color-mix(in srgb, var(--color-error, #e74c3c) 10%, transparent);
   border-radius: var(--radius-md);
-  border: 1px solid color-mix(in srgb, var(--color-error, #e74c3c) 30%, transparent);
+  border: 0.05rem solid color-mix(in srgb, var(--color-error, #e74c3c) 30%, transparent);
 }
 
 .admin-form-grid {
@@ -154,26 +190,32 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--color-text-muted);
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .admin-field input,
 .admin-field select {
   padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
   border-radius: var(--radius-md);
   background-color: var(--color-bg);
   color: var(--color-text);
   font-size: 0.9375rem;
-  transition: border-color 150ms;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  transition: border-color 150ms, box-shadow 150ms;
 }
 
 .admin-field input:focus,
 .admin-field select:focus {
   outline: none;
   border-color: var(--color-accent);
+  box-shadow: 0 0 0 0.15rem color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
 .admin-field--checkbox {
@@ -181,11 +223,14 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3) 0;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.9375rem;
 }
 
 .admin-field--checkbox input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+  width: 0.9rem;
+  height: 0.9rem;
   flex-shrink: 0;
   accent-color: var(--color-accent);
   cursor: pointer;
@@ -195,38 +240,46 @@
 .admin-form-actions {
   display: flex;
   gap: var(--space-3);
+  flex-wrap: wrap;
 }
 
-/* ── Table ──────────────────────────────────────────────────────────────── */
+/* ── Table wrapper ──────────────────────────────────────────────────────── */
 .admin-table-wrap {
   overflow-x: auto;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
+  border: 0.05rem solid var(--color-border);
+  -webkit-overflow-scrolling: touch;
 }
 
 .admin-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9375rem;
+  min-width: 30rem;
 }
 
 .admin-table thead {
   background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 0.05rem solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .admin-table th {
   padding: var(--space-3) var(--space-4);
   text-align: left;
   font-weight: 600;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   white-space: nowrap;
 }
 
 .admin-table td {
   padding: var(--space-3) var(--space-4);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 0.05rem solid var(--color-border);
   vertical-align: middle;
 }
 
@@ -238,22 +291,27 @@
   background-color: var(--color-surface-hover);
 }
 
+/* ── Responsive column hiding ───────────────────────────────────────────── */
+/* .admin-col-secondary  → masqué sur mobile (< 768px)   */
+/* .admin-col-tertiary   → masqué sur tablette (< 1024px) */
+
 /* ── Table cells ────────────────────────────────────────────────────────── */
 .admin-col-icon {
-  width: 48px;
+  width: 2.4rem;
 }
 
 .admin-col-icon img {
-  width: 32px;
-  height: 32px;
+  width: 1.6rem;
+  height: 1.6rem;
   object-fit: contain;
   border-radius: var(--radius-sm);
+  display: block;
 }
 
 .admin-icon-fallback {
   display: inline-flex;
-  width: 32px;
-  height: 32px;
+  width: 1.6rem;
+  height: 1.6rem;
   align-items: center;
   justify-content: center;
   background-color: var(--color-surface-hover);
@@ -273,7 +331,7 @@
   display: block;
   font-size: 0.75rem;
   color: var(--color-text-muted);
-  max-width: 260px;
+  max-width: 14rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -281,11 +339,12 @@
 
 .admin-badge {
   display: inline-block;
-  padding: 2px var(--space-3);
-  border-radius: var(--radius-full, 9999px);
+  padding: 0.15rem var(--space-3);
+  border-radius: var(--radius-full, 999rem);
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
 }
 
 .admin-badge--tv {
@@ -300,26 +359,108 @@
 
 .admin-col-actions {
   white-space: nowrap;
+}
+
+.admin-col-actions > * {
+  margin-right: var(--space-1);
+}
+
+.admin-col-actions > *:last-child {
+  margin-right: 0;
+}
+
+/* ── Categories layout ──────────────────────────────────────────────────── */
+.admin-cats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.admin-cats-section {
   display: flex;
-  gap: var(--space-2);
-  align-items: center;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.admin-cats-section-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 /* ── Empty state ────────────────────────────────────────────────────────── */
 .admin-empty {
   text-align: center;
-  padding: var(--space-8);
+  padding: var(--space-10) var(--space-8);
   color: var(--color-text-muted);
   font-size: 0.9375rem;
 }
 
-/* ── Responsive ─────────────────────────────────────────────────────────── */
-@media (max-width: 767px) {
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tablette (< 1024px) ────────────────────────────────────────────────── */
+@media (max-width: 63.9375rem) {
+  .admin-col-tertiary {
+    display: none;
+  }
+}
+
+/* ── Mobile (< 768px) ───────────────────────────────────────────────────── */
+@media (max-width: 47.9375rem) {
+  .page-admin {
+    padding: var(--space-4);
+  }
+
+  .admin-col-secondary {
+    display: none;
+  }
+
+  .admin-search {
+    max-width: 100%;
+    width: 100%;
+    flex: none;
+  }
+
+  .admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-toolbar-actions {
+    margin-left: 0;
+    justify-content: flex-end;
+  }
+
+  .admin-form {
+    padding: var(--space-4);
+  }
+
   .admin-form-grid {
     grid-template-columns: 1fr;
   }
 
-  .page-admin {
-    padding: var(--space-4);
+  .admin-cats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-btn--sm {
+    padding: var(--space-1) var(--space-2);
+    font-size: 0.75rem;
+  }
+}
+
+/* ── Petit mobile (< 480px) ─────────────────────────────────────────────── */
+@media (max-width: 29.9375rem) {
+  .admin-table {
+    font-size: 0.875rem;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: var(--space-2) var(--space-3);
   }
 }

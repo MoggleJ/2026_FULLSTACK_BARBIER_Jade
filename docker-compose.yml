@@ -9,6 +9,17 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-user}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
       POSTGRES_DB: ${POSTGRES_DB:-mjqbe}
+      APP_ADMIN_USERNAME: ${APP_ADMIN_USERNAME:-admin}
+      APP_ADMIN_PASSWORD: ${APP_ADMIN_PASSWORD:-}
+      APP_USER_USERNAME: ${APP_USER_USERNAME:-user}
+      APP_USER_PASSWORD: ${APP_USER_PASSWORD:-}
+     
+    command: >
+      postgres
+      -c app.admin_username=${APP_ADMIN_USERNAME}
+      -c app.admin_password=${APP_ADMIN_PASSWORD}
+      -c app.user_username=${APP_USER_USERNAME}
+      -c app.user_password=${APP_USER_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro

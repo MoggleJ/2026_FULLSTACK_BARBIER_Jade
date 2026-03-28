@@ -6,7 +6,7 @@ import { useLayout } from '../../hooks/useLayout.js';
 import AppCard from '../AppCard/AppCard.jsx';
 import './AppGrid.css';
 
-export default function AppGrid({ apps, onOpen, favoriteIds, onToggleFavorite }) {
+export default function AppGrid({ apps, onOpen, favoriteIds, onToggleFavorite, groupByCategory = false }) {
   const { mode } = useMode();
   const { t } = useLang();
   const { iconSize } = useIconSize();
@@ -58,6 +58,48 @@ export default function AppGrid({ apps, onOpen, favoriteIds, onToggleFavorite })
     e.preventDefault();
     cards[next].focus();
   };
+
+  if (groupByCategory) {
+    const grouped = categories.map((cat) => ({
+      name: cat,
+      apps: apps.filter((a) => a.category_name === cat),
+    }));
+    const uncategorized = apps.filter((a) => !a.category_name);
+
+    return (
+      <div className={containerClass} onKeyDown={handleKeyDown}>
+        {grouped.map(({ name, apps: catApps }) => (
+          <section key={name} className="app-grid-category-section">
+            <h2 className="app-grid-category-title">{t(`categories.${name}`) || name}</h2>
+            <div className={gridClass} ref={grouped[0].name === name ? gridRef : null}>
+              {catApps.map((app) => (
+                <AppCard
+                  key={app.id}
+                  app={app}
+                  onOpen={onOpen}
+                  isFavorite={favoriteIds?.has(app.id)}
+                  onToggleFavorite={onToggleFavorite}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
+        {uncategorized.length > 0 && (
+          <div className={gridClass}>
+            {uncategorized.map((app) => (
+              <AppCard
+                key={app.id}
+                app={app}
+                onOpen={onOpen}
+                isFavorite={favoriteIds?.has(app.id)}
+                onToggleFavorite={onToggleFavorite}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className={containerClass} onKeyDown={handleKeyDown}>

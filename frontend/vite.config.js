@@ -10,7 +10,10 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: ['./tests/frontend/setup.js'],
+    setupFiles: ['../tests/frontend/setup.js'],
     include: ['../tests/frontend/**/*.test.{js,jsx}'],
+    server: {
+      fs: { allow: ['..'] },
+    },
   },
 });

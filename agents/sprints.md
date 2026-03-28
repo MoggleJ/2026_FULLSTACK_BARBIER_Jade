@@ -79,35 +79,35 @@
 
 ---
 
-## 🏃 Sprint 8 — Release avancée 2 : Thèmes & Profils
+## 🏃 Sprint 8 ✅ — Release avancée 2 : Thèmes & Profils
 *Personnalisation poussée de l'interface et du profil utilisateur.*
 
-### Thèmes (10 thèmes)
-- [ ] 5 thèmes sombres : `dark`, `dark-blue`, `dark-purple`, `amoled`, `dark-green`
-- [ ] 5 thèmes clairs : `light`, `light-warm`, `light-blue`, `light-purple`, `light-green`
-- [ ] CSS variables par thème via `[data-theme="xxx"]` dans `index.css`
-- [ ] Application via `document.documentElement.setAttribute('data-theme', theme)`
-- [ ] Sélection via swatches visuels (grille de pastilles) dans la page Settings
-- [ ] Persistance en DB (colonne `settings.theme`) — retirer la contrainte CHECK actuelle si elle limite les valeurs
+### Thèmes (14 thèmes — 10 requis + 4 ajoutés sur demande utilisateur)
+- [x] 7 thèmes sombres : `dark`, `dark-blue`, `dark-purple`, `amoled`, `dark-green`, `dark-red`, `dark-contrast`
+- [x] 7 thèmes clairs : `light`, `light-warm`, `light-blue`, `light-purple`, `light-green`, `light-red`, `light-contrast`
+- [x] CSS variables par thème via `[data-theme="xxx"]` dans `index.css`
+- [x] Application via `document.documentElement.setAttribute('data-theme', theme)`
+- [x] Sélection via swatches visuels (grille de pastilles) dans la page Settings — triés dark d'abord, puis light
+- [x] Persistance en DB (colonne `settings.theme`) — contrainte CHECK retirée
 
 ### Profil utilisateur
-- [ ] Colonnes `email` (VARCHAR nullable unique) et `avatar` (TEXT nullable) ajoutées à la table `users`
-- [ ] Upload avatar : `multer`, max 5MB, formats jpg/png/webp, stocké dans `/backend/uploads/avatars/`
-- [ ] Volume Docker `./backend/uploads:/app/uploads` + route statique Express pour servir les fichiers
-- [ ] `GET /api/users/profile` — récupère le profil complet
-- [ ] `PUT /api/users/profile` — modifie pseudo et/ou email (vérification d'identité obligatoire)
-- [ ] `PUT /api/users/password` — change le mot de passe (vérification de l'ancien mot de passe)
-- [ ] `POST /api/users/avatar` — upload multipart/form-data
-- [ ] `DELETE /api/users/avatar` — supprime et remet à null
-- [ ] **Vérification d'identité** pour comptes classiques : re-saisie du mot de passe actuel
-- [ ] **Vérification d'identité** pour comptes OAuth : re-auth Google/GitHub (`/api/auth/google/reauth`, `/api/auth/github/reauth`) → callback `/oauth/reauth-callback`
-- [ ] Nouvelle page frontend `/profile` avec sections : avatar, pseudo/email, mot de passe / compte OAuth
-- [ ] Lien "Profil" ajouté dans la sidebar
+- [x] Colonnes `email` (VARCHAR nullable unique), `avatar` (TEXT nullable), `created_at` ajoutées à la table `users`
+- [x] Upload avatar : `multer`, max 5MB, formats jpg/png/webp, stocké dans `/backend/uploads/avatars/`
+- [x] Volume Docker `uploads:/app/uploads` + route statique Express pour servir les fichiers
+- [x] `GET /api/users/profile` — récupère le profil complet
+- [x] `PUT /api/users/profile` — modifie pseudo et/ou email (vérification d'identité obligatoire)
+- [x] `PUT /api/users/password` — change le mot de passe (vérification de l'ancien mot de passe)
+- [x] `POST /api/users/avatar` — upload multipart/form-data
+- [x] `DELETE /api/users/avatar` — supprime et remet à null
+- [x] **Vérification d'identité** pour comptes classiques : re-saisie du mot de passe actuel
+- [x] **Vérification d'identité** pour comptes OAuth : re-auth Google/GitHub (`/api/auth/google/reauth`, `/api/auth/github/reauth`)
+- [x] Nouvelle page frontend `/profile` avec sections : avatar, pseudo/email, mot de passe / compte OAuth
+- ~~[ ] Lien "Profil" ajouté dans la sidebar~~ — **supprimé sur demande** : profil accessible via carte dans Settings (voir specs §7)
 
 ### Performance
-- [ ] `React.lazy` + `Suspense` sur toutes les pages dans `App.jsx`
-- [ ] `loading="lazy"` sur les `<img>` dans `AppCard.jsx`
-- [ ] Skeleton CSS pendant le chargement des icônes d'apps
+- [x] `React.lazy` + `Suspense` sur toutes les pages dans `App.jsx`
+- [x] `loading="lazy"` sur les `<img>` dans `AppCard.jsx`
+- [x] Skeleton CSS pendant le chargement des icônes d'apps
 
 ---
 

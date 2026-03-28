@@ -12,6 +12,20 @@ export function updateUserRole(id, role) {
   });
 }
 
+export function updateAdminUser(id, fields) {
+  return apiFetch(`/admin/users/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(fields),
+  });
+}
+
+export function createAdminUser(fields) {
+  return apiFetch('/admin/users', {
+    method: 'POST',
+    body: JSON.stringify(fields),
+  });
+}
+
 export function deleteAdminUser(id) {
   return apiFetch(`/admin/users/${id}`, { method: 'DELETE' });
 }
