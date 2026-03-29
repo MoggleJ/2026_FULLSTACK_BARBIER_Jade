@@ -1,0 +1,123 @@
+.app-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color 150ms, transform 150ms;
+  text-align: center;
+  width: 100%;
+}
+
+.app-card:hover,
+.app-card:focus-visible {
+  color: var(--color-text);
+  transform: translateY(-0.25rem) scale(1.05);
+  outline: 0.15rem solid var(--color-accent);
+  outline-offset: 0.2rem;
+  border-radius: var(--radius-xl);
+}
+
+/* ── Favori ────────────────────────────────────────────── */
+.app-card-fav {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transition: opacity 150ms, color 150ms, transform 150ms;
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-card-fav svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.app-card:hover .app-card-fav,
+.app-card:focus-visible .app-card-fav,
+.app-card-fav--active {
+  opacity: 1 !important;
+}
+
+.app-card-fav--active {
+  color: #e74c3c;
+}
+
+.app-card-fav:hover {
+  transform: scale(1.2);
+  color: #e74c3c;
+}
+
+/* ── Icône ─────────────────────────────────────────────── */
+.app-card-icon {
+  width: var(--card-icon-container, 6.4rem);
+  height: var(--card-icon-container, 6.4rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.app-card-icon img {
+  width: var(--card-icon-size, 6rem);
+  height: var(--card-icon-size, 6rem);
+  object-fit: contain;
+  border-radius: var(--radius-xl);
+}
+
+.app-card-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--card-icon-size, 6rem);
+  height: var(--card-icon-size, 6rem);
+  border-radius: var(--radius-xl);
+  background-color: var(--color-surface-hover);
+  font-size: var(--card-initial-font, 3rem);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+/* ── Skeleton ──────────────────────────────────────────── */
+.app-card-skeleton {
+  display: block;
+  width: var(--card-icon-size, 6rem);
+  height: var(--card-icon-size, 6rem);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-hover) 25%,
+    var(--color-border)        50%,
+    var(--color-surface-hover) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position:  200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Nom ───────────────────────────────────────────────── */
+.app-card-name {
+  font-size: var(--card-name-font, 1.25rem);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}

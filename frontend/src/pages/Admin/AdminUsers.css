@@ -1,0 +1,63 @@
+/* Extends AdminApps.css — importe les mêmes classes de base */
+
+/* ── Sortable headers ─────────────────────────────────────────────────────── */
+.admin-users-th--sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.admin-users-th--sortable:hover {
+  color: var(--color-text);
+}
+
+.admin-users-th--sortable.active {
+  color: var(--color-accent);
+}
+
+.sort-indicator {
+  font-size: 0.75rem;
+  margin-left: 0.1rem;
+}
+
+/* ── Role badges ─────────────────────────────────────────────────────────── */
+.admin-badge--admin {
+  background-color: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  color: var(--color-accent);
+}
+
+.admin-badge--user {
+  background-color: color-mix(in srgb, var(--color-text-muted) 15%, transparent);
+  color: var(--color-text-muted);
+}
+
+/* ── Table cells ─────────────────────────────────────────────────────────── */
+.admin-cell-muted {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.admin-cell-center {
+  text-align: center;
+}
+
+/* ── Loading ─────────────────────────────────────────────────────────────── */
+.admin-loading {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-8);
+}
+
+/* ── Pagination ──────────────────────────────────────────────────────────── */
+.admin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.admin-pagination-info {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}

@@ -22,6 +22,9 @@ Thumbs.db
 # Docker
 pgdata/
 
+# Assets locaux
+db/image.png
+
 # IDE
 .vscode/
 .idea/

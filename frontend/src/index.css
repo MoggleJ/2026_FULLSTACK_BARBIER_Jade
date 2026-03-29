@@ -18,28 +18,213 @@
   /* Sémantique */
   --color-danger:       #d4183d;
 
-  /* Sidebar */
-  --sidebar-width:            256px;
-  --sidebar-width-collapsed:   80px;
-
   /* Border radius */
-  --radius-sm:   6px;
-  --radius-md:   8px;
-  --radius-lg:   10px;
-  --radius-xl:   14px;
-  --radius-full: 9999px;
+  --radius-sm:   0.3rem;
+  --radius-md:   0.4rem;
+  --radius-lg:   0.5rem;
+  --radius-xl:   0.7rem;
+  --radius-full: 999rem;
 
   /* Spacing */
-  --space-1:  4px;
-  --space-2:  8px;
-  --space-3:  12px;
-  --space-4:  16px;
-  --space-6:  24px;
-  --space-8:  32px;
-  --space-12: 48px;
+  --space-1:  0.2rem;
+  --space-2:  0.4rem;
+  --space-3:  0.6rem;
+  --space-4:  0.8rem;
+  --space-6:  1.2rem;
+  --space-8:  1.6rem;
+  --space-10: 2rem;
+  --space-12: 2.4rem;
+
+  /* Sidebar */
+  --sidebar-width:            15rem;
+  --sidebar-width-collapsed:   4.4rem;
+  --mobile-nav-height:          3.6rem;
+  --mobile-header-height:       2.4rem;
 
   /* Typography */
-  --font-size-base: 16px;
+  --font-size-base: 20px;
+}
+
+/* ── Thème dark (explicite, identique au :root) ───────────────────────────── */
+[data-theme="dark"] {
+  --color-bg:            #09090b;
+  --color-surface:       #18181b;
+  --color-surface-hover: #27272a;
+  --color-border:        #27272a;
+  --color-text:          #fafafa;
+  --color-text-muted:    #a1a1aa;
+  --color-text-subtle:   #71717a;
+  --color-accent:        #0ea5e9;
+  --color-accent-hover:  #2563eb;
+}
+
+/* ── Dark Blue — Slate nuit ───────────────────────────────────────────────── */
+[data-theme="dark-blue"] {
+  --color-bg:            #0a0f1e;
+  --color-surface:       #0f172a;
+  --color-surface-hover: #1e293b;
+  --color-border:        #1e293b;
+  --color-text:          #f1f5f9;
+  --color-text-muted:    #94a3b8;
+  --color-text-subtle:   #64748b;
+  --color-accent:        #60a5fa;
+  --color-accent-hover:  #3b82f6;
+}
+
+/* ── Dark Purple — Violet profond ─────────────────────────────────────────── */
+[data-theme="dark-purple"] {
+  --color-bg:            #0d0a1a;
+  --color-surface:       #1a1030;
+  --color-surface-hover: #261848;
+  --color-border:        #261848;
+  --color-text:          #f5f3ff;
+  --color-text-muted:    #c4b5fd;
+  --color-text-subtle:   #a78bfa;
+  --color-accent:        #a78bfa;
+  --color-accent-hover:  #7c3aed;
+}
+
+/* ── AMOLED — Noir pur ────────────────────────────────────────────────────── */
+[data-theme="amoled"] {
+  --color-bg:            #000000;
+  --color-surface:       #0a0a0a;
+  --color-surface-hover: #141414;
+  --color-border:        #1a1a1a;
+  --color-text:          #ffffff;
+  --color-text-muted:    #999999;
+  --color-text-subtle:   #666666;
+  --color-accent:        #22d3ee;
+  --color-accent-hover:  #06b6d4;
+}
+
+/* ── Dark Green — Forêt ───────────────────────────────────────────────────── */
+[data-theme="dark-green"] {
+  --color-bg:            #052e16;
+  --color-surface:       #14532d;
+  --color-surface-hover: #166534;
+  --color-border:        #166534;
+  --color-text:          #f0fdf4;
+  --color-text-muted:    #86efac;
+  --color-text-subtle:   #4ade80;
+  --color-accent:        #34d399;
+  --color-accent-hover:  #10b981;
+}
+
+/* ── Light — Gris clair ───────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --color-bg:            #f9fafb;
+  --color-surface:       #ffffff;
+  --color-surface-hover: #f3f4f6;
+  --color-border:        #e5e7eb;
+  --color-text:          #111827;
+  --color-text-muted:    #6b7280;
+  --color-text-subtle:   #9ca3af;
+  --color-accent:        #0284c7;
+  --color-accent-hover:  #0369a1;
+}
+
+/* ── Light Warm — Crème ambré ─────────────────────────────────────────────── */
+[data-theme="light-warm"] {
+  --color-bg:            #fffbeb;
+  --color-surface:       #ffffff;
+  --color-surface-hover: #fef3c7;
+  --color-border:        #fde68a;
+  --color-text:          #1c1917;
+  --color-text-muted:    #78716c;
+  --color-text-subtle:   #a8a29e;
+  --color-accent:        #d97706;
+  --color-accent-hover:  #b45309;
+}
+
+/* ── Light Blue — Ciel ────────────────────────────────────────────────────── */
+[data-theme="light-blue"] {
+  --color-bg:            #f0f9ff;
+  --color-surface:       #ffffff;
+  --color-surface-hover: #e0f2fe;
+  --color-border:        #bae6fd;
+  --color-text:          #0c1a29;
+  --color-text-muted:    #64748b;
+  --color-text-subtle:   #94a3b8;
+  --color-accent:        #0284c7;
+  --color-accent-hover:  #0369a1;
+}
+
+/* ── Light Purple — Lavande ───────────────────────────────────────────────── */
+[data-theme="light-purple"] {
+  --color-bg:            #faf5ff;
+  --color-surface:       #ffffff;
+  --color-surface-hover: #f3e8ff;
+  --color-border:        #e9d5ff;
+  --color-text:          #1e0a3c;
+  --color-text-muted:    #7c3aed;
+  --color-text-subtle:   #a78bfa;
+  --color-accent:        #7c3aed;
+  --color-accent-hover:  #6d28d9;
+}
+
+/* ── Light Green — Menthe ─────────────────────────────────────────────────── */
+[data-theme="light-green"] {
+  --color-bg:            #f0fdf4;
+  --color-surface:       #ffffff;
+  --color-surface-hover: #dcfce7;
+  --color-border:        #bbf7d0;
+  --color-text:          #052e16;
+  --color-text-muted:    #16a34a;
+  --color-text-subtle:   #4ade80;
+  --color-accent:        #16a34a;
+  --color-accent-hover:  #15803d;
+}
+
+/* ── Dark Red — Braise ────────────────────────────────────────────────────── */
+[data-theme="dark-red"] {
+  --color-bg:            #0f0505;
+  --color-surface:       #1c0a0a;
+  --color-surface-hover: #2d1010;
+  --color-border:        #3b1515;
+  --color-text:          #fef2f2;
+  --color-text-muted:    #fca5a5;
+  --color-text-subtle:   #f87171;
+  --color-accent:        #ef4444;
+  --color-accent-hover:  #dc2626;
+}
+
+/* ── Light Red — Rosé ─────────────────────────────────────────────────────── */
+[data-theme="light-red"] {
+  --color-bg:            #fff5f5;
+  --color-surface:       #ffffff;
+  --color-surface-hover: #fee2e2;
+  --color-border:        #fecaca;
+  --color-text:          #1a0505;
+  --color-text-muted:    #dc2626;
+  --color-text-subtle:   #ef4444;
+  --color-accent:        #dc2626;
+  --color-accent-hover:  #b91c1c;
+}
+
+/* ── Dark Contrast — Noir et blanc ────────────────────────────────────────── */
+[data-theme="dark-contrast"] {
+  --color-bg:            #000000;
+  --color-surface:       #111111;
+  --color-surface-hover: #222222;
+  --color-border:        #444444;
+  --color-text:          #ffffff;
+  --color-text-muted:    #dddddd;
+  --color-text-subtle:   #aaaaaa;
+  --color-accent:        #ffffff;
+  --color-accent-hover:  #cccccc;
+}
+
+/* ── Light Contrast — Blanc pur ───────────────────────────────────────────── */
+[data-theme="light-contrast"] {
+  --color-bg:            #ffffff;
+  --color-surface:       #f0f0f0;
+  --color-surface-hover: #e0e0e0;
+  --color-border:        #999999;
+  --color-text:          #000000;
+  --color-text-muted:    #222222;
+  --color-text-subtle:   #555555;
+  --color-accent:        #000000;
+  --color-accent-hover:  #333333;
 }
 
 /* ── Reset ────────────────────────────────────────────────────────────────── */
@@ -74,9 +259,9 @@ body {
 }
 
 .loading-spinner {
-  width: 36px;
-  height: 36px;
-  border: 3px solid var(--color-border);
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 0.15rem solid var(--color-border);
   border-top-color: var(--color-accent);
   border-radius: var(--radius-full);
   animation: spin 0.7s linear infinite;
@@ -84,4 +269,44 @@ body {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* ── Utilitaires pages ────────────────────────────────────────────────────── */
+.page-header {
+  margin-bottom: var(--space-8);
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.mode-badge {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.page-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  border: 0.1rem dashed var(--color-border);
+  border-radius: var(--radius-xl);
+  color: var(--color-text-subtle);
+  font-size: 0.9375rem;
+}
+
+.page-error {
+  color: var(--color-danger);
+  font-size: 0.9375rem;
+  padding: var(--space-4) 0;
 }

@@ -1,0 +1,114 @@
+.app-viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── Barre de contrôle ──────────────────────────────────── */
+.app-viewer-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--color-surface);
+  border-bottom: 0.05rem solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.app-viewer-back {
+  background: none;
+  border: 0.05rem solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: color 150ms, border-color 150ms;
+  white-space: nowrap;
+}
+
+.app-viewer-back:hover {
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+}
+
+.app-viewer-title {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-viewer-open {
+  font-size: 0.875rem;
+  color: var(--color-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.app-viewer-open:hover {
+  text-decoration: underline;
+}
+
+/* ── Iframe ─────────────────────────────────────────────── */
+.app-viewer-frame {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background-color: #fff;
+}
+
+/* ── Iframe masqué si bloqué ────────────────────────────── */
+.app-viewer-frame--hidden {
+  display: none;
+}
+
+/* ── Iframe bloqué ──────────────────────────────────────── */
+.app-viewer-blocked {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: var(--space-8);
+}
+
+.app-viewer-blocked a {
+  padding: var(--space-2) var(--space-5);
+  background-color: var(--color-accent);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 150ms;
+}
+
+.app-viewer-blocked a:hover {
+  opacity: 0.85;
+}
+
+/* ── Erreur ─────────────────────────────────────────────── */
+.app-viewer-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  height: 100%;
+  color: var(--color-text-muted);
+}
+
+.app-viewer-error button {
+  background: none;
+  border: 0.05rem solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+}

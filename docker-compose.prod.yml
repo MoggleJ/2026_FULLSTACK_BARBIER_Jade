@@ -1,0 +1,26 @@
+# Production overrides — usage :
+#   docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+#
+# Avant de lancer, définir VITE_API_URL dans votre .env (ou en variable d'env) :
+#   VITE_API_URL=https://votre-domaine.com/api
+
+services:
+
+  frontend:
+    build:
+      context: ./frontend
+      target: prod
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:5000/api}
+    image: mjqbe_frontend_prod
+    volumes: []
+    ports:
+      - "80:80"
+    command: []
+
+  backend:
+    build:
+      context: ./backend
+      target: prod
+    volumes: []
+    command: []

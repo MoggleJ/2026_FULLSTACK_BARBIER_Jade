@@ -1,0 +1,47 @@
+import { useState } from 'react';
+import { IconHeart, IconHeartOutline } from '../icons/icons.jsx';
+import './AppCard.css';
+
+export default function AppCard({ app, onOpen, isFavorite = false, onToggleFavorite }) {
+  const [imgError, setImgError] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const initial = app.name?.[0]?.toUpperCase() ?? '?';
+
+  const handleFavorite = (e) => {
+    e.stopPropagation();
+    onToggleFavorite?.(app.id);
+  };
+
+  return (
+    <div className="app-card" onClick={() => onOpen(app)} title={app.name} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && onOpen(app)}>
+      {onToggleFavorite && (
+        <button
+          className={`app-card-fav${isFavorite ? ' app-card-fav--active' : ''}`}
+          onClick={handleFavorite}
+          title={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+          aria-label={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+        >
+          {isFavorite ? <IconHeart /> : <IconHeartOutline />}
+        </button>
+      )}
+      <div className="app-card-icon">
+        {app.icon && !imgError ? (
+          <>
+            {!imgLoaded && <span className="app-card-skeleton" />}
+            <img
+              src={app.icon}
+              alt={app.name}
+              loading="lazy"
+              onLoad={() => setImgLoaded(true)}
+              onError={() => setImgError(true)}
+              style={imgLoaded ? {} : { opacity: 0, position: 'absolute' }}
+            />
+          </>
+        ) : (
+          <span className="app-card-initial">{initial}</span>
+        )}
+      </div>
+      <span className="app-card-name">{app.name}</span>
+    </div>
+  );
+}
