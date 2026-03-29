@@ -1,0 +1,19 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+.layout-main {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+@media (max-width: 63.9375rem) {
+  .layout-main {
+    padding-top: var(--mobile-header-height);
+    padding-bottom: var(--mobile-nav-height);
+  }
+}

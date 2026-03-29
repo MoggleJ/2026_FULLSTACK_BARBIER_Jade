@@ -1,30 +1,83 @@
-import { useEffect, useState } from 'react';
-import './App.css';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext.jsx';
+import { ThemeProvider } from './context/ThemeContext.jsx';
+import { LangProvider } from './context/LangContext.jsx';
+import { ClockFormatProvider } from './context/ClockFormatContext.jsx';
+import { ModeProvider } from './context/ModeContext.jsx';
+import { IconSizeProvider } from './context/IconSizeContext.jsx';
+import { LayoutProvider } from './context/LayoutContext.jsx';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
+import Layout from './components/Layout/Layout.jsx';
 
-function App() {
-  const [apiStatus, setApiStatus] = useState(null);
+const Login        = lazy(() => import('./pages/Auth/Login.jsx'));
+const Register     = lazy(() => import('./pages/Auth/Register.jsx'));
+const OAuthCallback = lazy(() => import('./pages/Auth/OAuthCallback.jsx'));
+const Home         = lazy(() => import('./pages/Home/Home.jsx'));
+const AllApps      = lazy(() => import('./pages/AllApps/AllApps.jsx'));
+const Search       = lazy(() => import('./pages/Search/Search.jsx'));
+const Settings     = lazy(() => import('./pages/Settings/Settings.jsx'));
+const AppViewer    = lazy(() => import('./pages/AppViewer/AppViewer.jsx'));
+const AdminBoard       = lazy(() => import('./pages/Admin/AdminBoard.jsx'));
+const AdminApps        = lazy(() => import('./pages/Admin/AdminApps.jsx'));
+const AdminUsers       = lazy(() => import('./pages/Admin/AdminUsers.jsx'));
+const AdminCategories  = lazy(() => import('./pages/Admin/AdminCategories.jsx'));
+const AdminLogs        = lazy(() => import('./pages/Admin/AdminLogs.jsx'));
+const Profile      = lazy(() => import('./pages/Profile/Profile.jsx'));
+const NotFound     = lazy(() => import('./pages/NotFound/NotFound.jsx'));
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/health`)
-      .then((res) => res.json())
-      .then((data) => setApiStatus(data))
-      .catch(() => setApiStatus({ status: 'error', message: 'Impossible de joindre l\'API' }));
-  }, []);
-
+function PageSpinner() {
   return (
-    <div className="app">
-      <h1>MJQbe WEB</h1>
-      <p>Sprint 1 — Test de communication Frontend ↔ API</p>
-      {apiStatus ? (
-        <div className={`status ${apiStatus.status}`}>
-          <strong>API :</strong> {apiStatus.message}
-          {apiStatus.db && <span> | DB : {apiStatus.db}</span>}
-        </div>
-      ) : (
-        <div className="status loading">Connexion à l'API...</div>
-      )}
+    <div className="loading-screen">
+      <div className="loading-spinner" />
     </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <ThemeProvider>
+          <LangProvider>
+            <ClockFormatProvider>
+              <Suspense fallback={<PageSpinner />}>
+                <Routes>
+                  <Route path="/login"          element={<Login />} />
+                  <Route path="/register"        element={<Register />} />
+                  <Route path="/oauth/callback"  element={<OAuthCallback />} />
+                  <Route
+                    element={
+                      <ProtectedRoute>
+                        <ModeProvider>
+                          <IconSizeProvider>
+                            <LayoutProvider>
+                              <Layout />
+                            </LayoutProvider>
+                          </IconSizeProvider>
+                        </ModeProvider>
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route index              element={<Home />} />
+                    <Route path="/apps"       element={<AllApps />} />
+                    <Route path="/search"     element={<Search />} />
+                    <Route path="/settings"   element={<Settings />} />
+                    <Route path="/profile"    element={<Profile />} />
+                    <Route path="/viewer/:id" element={<AppViewer />} />
+                    <Route path="/admin"             element={<AdminBoard />} />
+                    <Route path="/admin/apps"        element={<AdminApps />} />
+                    <Route path="/admin/users"       element={<AdminUsers />} />
+                    <Route path="/admin/categories"  element={<AdminCategories />} />
+                    <Route path="/admin/logs"        element={<AdminLogs />} />
+                    <Route path="*"           element={<NotFound />} />
+                  </Route>
+                </Routes>
+              </Suspense>
+            </ClockFormatProvider>
+          </LangProvider>
+        </ThemeProvider>
+      </AuthProvider>
+    </BrowserRouter>
+  );
+}
