@@ -2,15 +2,15 @@ import { jest } from '@jest/globals';
 
 // ── Mocks ───────────────────────────────────────────────────────────────────
 
-jest.unstable_mockModule('../../backend/src/repositories/log-repository.js', () => ({
+jest.unstable_mockModule('../src/repositories/log-repository.js', () => ({
   insert:  jest.fn(),
   findAll: jest.fn(),
 }));
 
 // ── Imports après mocks ─────────────────────────────────────────────────────
 
-const logRepo = await import('../../backend/src/repositories/log-repository.js');
-const { log, getLogs } = await import('../../backend/src/services/log-service.js');
+const logRepo = await import('../src/repositories/log-repository.js');
+const { log, getLogs } = await import('../src/services/log-service.js');
 
 // ── Tests ───────────────────────────────────────────────────────────────────
 

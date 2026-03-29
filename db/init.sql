@@ -104,7 +104,7 @@ FROM (VALUES
   ('TF1+',        'https://www.google.com/s2/favicons?domain=tf1.fr&sz=128',          'https://www.tf1.fr'),
   ('France.tv',   'https://www.google.com/s2/favicons?domain=france.tv&sz=128',       'https://www.france.tv'),
   ('M6+',         'https://www.google.com/s2/favicons?domain=6play.fr&sz=128',        'https://www.6play.fr'),
-  ('Arte.tv',     'https://www.google.com/s2/favicons?domain=arte.tv&sz=128',         'https://www.arte.tv'),
+  ('Arte.tv',     'https://www.arte.tv/favicon.ico',                                  'https://www.arte.tv'),
   ('Crunchyroll', 'https://www.google.com/s2/favicons?domain=crunchyroll.com&sz=128', 'https://www.crunchyroll.com')
 ) AS t(name, icon, url);
 
@@ -199,7 +199,7 @@ SELECT name, icon, url,
        (SELECT id FROM categories WHERE name = 'Mes Apps' AND mode = 'Desktop'),
        'Desktop', FALSE
 FROM (VALUES
-  ('Gestion Tâches', '/logos/task.png',      '/tasks')
+  ('Gestion Tâches', '/logos/task.png',      'http://localhost:5000/apps/tasks/')
 ) AS t(name, icon, url);
 
 -- Mes Apps (externes)
@@ -219,3 +219,11 @@ VALUES
   ( current_setting('app.admin_username', true), crypt(current_setting('app.admin_password', true), gen_salt('bf')), 'admin' ),
   ( current_setting('app.user_username', true), crypt(current_setting('app.user_password', true), gen_salt('bf')),  'user' )
 ON CONFLICT (username) DO NOTHING;
+
+INSERT INTO settings (user_id)
+SELECT id FROM users
+WHERE username IN (
+  current_setting('app.admin_username', true),
+  current_setting('app.user_username', true)
+)
+ON CONFLICT (user_id) DO NOTHING;

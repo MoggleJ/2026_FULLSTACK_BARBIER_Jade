@@ -1,18 +1,18 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import { AuthContext } from '../../frontend/src/context/AuthContext.jsx';
+import { AuthContext } from '../src/context/AuthContext.jsx';
 
 // ── Mocks ───────────────────────────────────────────────────────────────────
 
-vi.mock('../../frontend/src/api/auth.js', () => ({
+vi.mock('../src/api/auth.js', () => ({
   loginRequest:    vi.fn(),
   registerRequest: vi.fn(),
   logoutRequest:   vi.fn(),
   getMeRequest:    vi.fn(),
 }));
 
-import * as authApi from '../../frontend/src/api/auth.js';
-import { useAuth } from '../../frontend/src/hooks/useAuth.js';
+import * as authApi from '../src/api/auth.js';
+import { useAuth } from '../src/hooks/useAuth.js';
 
 // ── Wrapper ─────────────────────────────────────────────────────────────────
 

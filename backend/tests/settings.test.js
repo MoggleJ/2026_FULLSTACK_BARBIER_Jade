@@ -2,15 +2,15 @@ import { jest } from '@jest/globals';
 
 // ── Mocks ───────────────────────────────────────────────────────────────────
 
-jest.unstable_mockModule('../../backend/src/repositories/settings-repository.js', () => ({
+jest.unstable_mockModule('../src/repositories/settings-repository.js', () => ({
   findByUserId:    jest.fn(),
   updateByUserId:  jest.fn(),
 }));
 
 // ── Imports après mocks ─────────────────────────────────────────────────────
 
-const settingsRepo = await import('../../backend/src/repositories/settings-repository.js');
-const { get, update } = await import('../../backend/src/services/settings-service.js');
+const settingsRepo = await import('../src/repositories/settings-repository.js');
+const { get, update } = await import('../src/services/settings-service.js');
 
 // ── Tests ───────────────────────────────────────────────────────────────────
 

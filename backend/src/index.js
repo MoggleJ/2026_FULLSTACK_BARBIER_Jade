@@ -31,6 +31,9 @@ app.get('/api/health', async (_req, res) => {
 // Static uploads (avatars)
 app.use('/uploads/avatars', express.static('/app/uploads/avatars'));
 
+// Mini-apps standalone
+app.use('/apps', express.static('/apps-static'));
+
 app.use('/api', apiRouter);
 
 app.listen(PORT, () => {

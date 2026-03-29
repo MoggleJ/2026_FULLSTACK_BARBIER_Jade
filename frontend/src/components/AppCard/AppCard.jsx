@@ -13,7 +13,7 @@ export default function AppCard({ app, onOpen, isFavorite = false, onToggleFavor
   };
 
   return (
-    <button className="app-card" onClick={() => onOpen(app)} title={app.name}>
+    <div className="app-card" onClick={() => onOpen(app)} title={app.name} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && onOpen(app)}>
       {onToggleFavorite && (
         <button
           className={`app-card-fav${isFavorite ? ' app-card-fav--active' : ''}`}
@@ -42,6 +42,6 @@ export default function AppCard({ app, onOpen, isFavorite = false, onToggleFavor
         )}
       </div>
       <span className="app-card-name">{app.name}</span>
-    </button>
+    </div>
   );
 }

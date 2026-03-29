@@ -5,17 +5,17 @@ import { MemoryRouter } from 'react-router-dom';
 // ── Mocks ───────────────────────────────────────────────────────────────────
 
 const mockLogin = vi.fn();
-vi.mock('../../frontend/src/hooks/useAuth.js', () => ({
+vi.mock('../src/hooks/useAuth.js', () => ({
   useAuth: () => ({ login: mockLogin }),
 }));
 
-vi.mock('../../frontend/src/hooks/useLang.js', () => ({
+vi.mock('../src/hooks/useLang.js', () => ({
   useLang: () => ({ t: (key) => key }),
 }));
 
 // ── Composant ───────────────────────────────────────────────────────────────
 
-import Login from '../../frontend/src/pages/Auth/Login.jsx';
+import Login from '../src/pages/Auth/Login.jsx';
 
 function renderLogin(search = '') {
   return render(

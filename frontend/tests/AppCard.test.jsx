@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import AppCard from '../../frontend/src/components/AppCard/AppCard.jsx';
+import AppCard from '../src/components/AppCard/AppCard.jsx';
 
 const mockApp = {
   id: 1,
@@ -49,8 +49,9 @@ describe('AppCard', () => {
 
   it('shows active favorite state', () => {
     render(<AppCard app={mockApp} onOpen={() => {}} isFavorite={true} onToggleFavorite={() => {}} />);
-    expect(screen.getByLabelText('Retirer des favoris')).toBeInTheDocument();
-    expect(screen.getByText('♥')).toBeInTheDocument();
+    const favBtn = screen.getByLabelText('Retirer des favoris');
+    expect(favBtn).toBeInTheDocument();
+    expect(favBtn).toHaveClass('app-card-fav--active');
   });
 
   it('calls onToggleFavorite with app id when favorite button is clicked', () => {

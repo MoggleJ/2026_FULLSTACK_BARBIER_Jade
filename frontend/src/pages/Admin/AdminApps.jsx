@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useLang } from '../../hooks/useLang.js';
 import { fetchApps, createApp, updateApp, deleteApp } from '../../api/apps.js';

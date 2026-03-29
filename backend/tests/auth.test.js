@@ -2,14 +2,14 @@ import { jest } from '@jest/globals';
 
 // ── Mocks ───────────────────────────────────────────────────────────────────
 
-jest.unstable_mockModule('../../backend/src/repositories/user-repository.js', () => ({
+jest.unstable_mockModule('../src/repositories/user-repository.js', () => ({
   findByUsername:      jest.fn(),
   findById:            jest.fn(),
   create:              jest.fn(),
   createDefaultSettings: jest.fn(),
 }));
 
-jest.unstable_mockModule('../../backend/src/services/log-service.js', () => ({
+jest.unstable_mockModule('../src/services/log-service.js', () => ({
   log: jest.fn(),
 }));
 
@@ -29,10 +29,10 @@ jest.unstable_mockModule('jsonwebtoken', () => ({
 
 // ── Imports après mocks ─────────────────────────────────────────────────────
 
-const userRepo  = await import('../../backend/src/repositories/user-repository.js');
-const logSvc    = await import('../../backend/src/services/log-service.js');
+const userRepo  = await import('../src/repositories/user-repository.js');
+const logSvc    = await import('../src/services/log-service.js');
 const bcrypt    = (await import('bcrypt')).default;
-const { register, login } = await import('../../backend/src/services/auth-service.js');
+const { register, login } = await import('../src/services/auth-service.js');
 
 // ── Tests ───────────────────────────────────────────────────────────────────
 

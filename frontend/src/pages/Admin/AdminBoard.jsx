@@ -5,7 +5,7 @@ import { useLang } from '../../hooks/useLang.js';
 import { fetchApps } from '../../api/apps.js';
 import { fetchCategories } from '../../api/categories.js';
 import { fetchAdminUsers } from '../../api/admin.js';
-import { IconGrid, IconUser, IconList, IconShield } from '../../components/icons/icons.jsx';
+import { IconGrid, IconUser, IconList, IconShield, IconClock } from '../../components/icons/icons.jsx';
 import './AdminBoard.css';
 
 export default function AdminBoard() {
@@ -63,6 +63,14 @@ export default function AdminBoard() {
       count: stats.categories,
       accent: 'cat',
     },
+    {
+      to: '/admin/logs',
+      icon: <IconClock />,
+      title: t('admin.boardLogsTitle'),
+      desc:  t('admin.boardLogsDesc'),
+      count: null,
+      accent: 'logs',
+    },
   ];
 
   return (
@@ -103,7 +111,7 @@ export default function AdminBoard() {
               <span className="admin-board-card-desc">{card.desc}</span>
             </div>
             <div className="admin-board-card-footer">
-              <span className="admin-board-card-count">{card.count}</span>
+              {card.count !== null && <span className="admin-board-card-count">{card.count}</span>}
               <span className="admin-board-card-arrow">→</span>
             </div>
           </Link>

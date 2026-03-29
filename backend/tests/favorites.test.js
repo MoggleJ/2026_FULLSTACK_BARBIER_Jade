@@ -2,22 +2,22 @@ import { jest } from '@jest/globals';
 
 // ── Mocks ───────────────────────────────────────────────────────────────────
 
-jest.unstable_mockModule('../../backend/src/repositories/favorites-repository.js', () => ({
+jest.unstable_mockModule('../src/repositories/favorites-repository.js', () => ({
   findByUser: jest.fn(),
   add:        jest.fn(),
   remove:     jest.fn(),
 }));
 
-jest.unstable_mockModule('../../backend/src/db.js', () => ({
+jest.unstable_mockModule('../src/db.js', () => ({
   default: { query: jest.fn() },
 }));
 
 // ── Imports après mocks ─────────────────────────────────────────────────────
 
-const favRepo = await import('../../backend/src/repositories/favorites-repository.js');
-const db      = (await import('../../backend/src/db.js')).default;
+const favRepo = await import('../src/repositories/favorites-repository.js');
+const db      = (await import('../src/db.js')).default;
 const { getFavorites, addFavorite, removeFavorite } =
-  await import('../../backend/src/services/favorites-service.js');
+  await import('../src/services/favorites-service.js');
 
 // ── Tests ───────────────────────────────────────────────────────────────────
 
